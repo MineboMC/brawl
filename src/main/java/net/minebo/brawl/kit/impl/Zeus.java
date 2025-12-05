@@ -123,10 +123,7 @@ public class Zeus extends Kit {
         // Deal damage if we hit a player
         if (event.getHitEntity() instanceof Player hitPlayer) {
             Player shooter = event.getShooter();
-            hitPlayer.damage(20.0, shooter); // 8.0 is 4 hearts, change as desired
-
-            // Optional: Feedback messages
-            hitPlayer.sendMessage(ColorUtil.translateColors("&eYou were struck by Zeus's lightning!"));
+            hitPlayer.damage(20.0, shooter);
         }
     }
 
