@@ -56,7 +56,7 @@ public class ProtectionListener implements Listener {
             player.sendMessage(ColorUtil.translateColors("&cYour spawn protection has been broken!"));
 
             if(profile.getSelectedKit() == null) {
-                if(profile.lastKit == null) {
+                if(Kit.get(profile.lastKit) == null) {
                     Kit.get("PvP").apply(player);
                 } else {
                     Kit.get(profile.lastKit).apply(player);
