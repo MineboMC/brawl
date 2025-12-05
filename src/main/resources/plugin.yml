@@ -4,5 +4,5 @@ description: "The main plugin for Brawl, a kit based pvp gamemode on Minebo."
 authors: ["Ian Rich"]
 website: "https://github.com/MineboMC/Brawl"
 main: net.minebo.brawl.Brawl
-soft-depend: ["PlaceholderAPI", "kRegions"]
+soft-depend: ["kRegions"]
 api-version: '1.20'

@@ -1,15 +1,15 @@
-# HungerGames
-A plugin to run the HungerGames minigame, based on McPvP's HG and MineHQ's MineHG
+# Brawl
+A plugin to handle Brawl, our KitPvP gamemode.
 
 # Download
-To setup HungerGames usage with maven, put the following in your pom.xml
+To setup Brawl usage with maven, put the following in your pom.xml
 
 ```xml
 <dependencies>
-    <!-- Depend on HungerGames -->
+    <!-- Depend on Brawl -->
     <dependency>
         <groupId>net.minebo</groupId>
-        <artifactId>HungerGames</artifactId>
+        <artifactId>Brawl</artifactId>
         <version>1.0-DEV</version>
         <scope>provided</scope>
     </dependency>
@@ -25,7 +25,7 @@ Compilation requires the following to be fulfilled:
 # Updates
 This plugin is provided "as is", which means no updates or new features are guaranteed. We will do our best to keep updating and pushing new updates, and you are more than welcome to contribute your time as well and make pull requests for bug fixes.
 
-Once these tasks have been taken care of, compilation via `mvn clean install` will result in `target/hungergames-1.0-DEV.jar` being created.
+Once these tasks have been taken care of, compilation via `mvn clean install` will result in `target/brawl-1.0-DEV.jar` being created.
 
 # License
 This software is available under the following licenses:
