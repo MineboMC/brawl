@@ -1,5 +1,5 @@
 # Brawl
-A plugin to handle Brawl, our KitPvP gamemode.
+A plugin to handle Brawl, our KitPvP gamemode. This is currently playable on our dev realm, dev.minebo.net.
 
 # Download
 To setup Brawl usage with maven, put the following in your pom.xml
