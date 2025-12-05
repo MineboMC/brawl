@@ -130,7 +130,7 @@ public class Zeus extends Kit {
                 player.getLocation().getWorld().strikeLightningEffect(player.getLocation());
 
                 Player shooter = event.getShooter();
-                player.damage(20.0, shooter);
+                player.damage(14.0, shooter);
             });
         }
     }

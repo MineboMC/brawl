@@ -115,7 +115,7 @@ public class SoupListener implements Listener {
             Inventory inventory = Bukkit.createInventory(null, 54, "Free Soup");
             Kit.fillInvWithSoup(inventory);
             player.openInventory(inventory);
-            soupCooldown.applyCooldown(player, 1, TimeUnit.MINUTES, Brawl.getInstance());
+            soupCooldown.applyCooldown(player, 60, TimeUnit.SECONDS, Brawl.getInstance());
         }
     }
 
