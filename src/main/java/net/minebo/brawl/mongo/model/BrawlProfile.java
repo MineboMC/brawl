@@ -109,7 +109,7 @@ public class BrawlProfile {
     }
 
     public Boolean ownsKit(Kit kit) {
-        return kit.getPrice() == 0 || ownedKits.contains(kit.getName());
+        return kit.getPrice() == 0 || ownedKits.contains(kit.getName()) || Kit.freeKitMode;
     }
 
     /**

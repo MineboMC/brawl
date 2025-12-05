@@ -36,24 +36,4 @@ public class KitCommands extends BaseCommand {
 
     }
 
-    @Default
-    @Description("Select a kit without opening the gui.")
-    @Syntax("<kit>")
-    @CommandCompletion("@kits")
-    public void kitCommand(Player player, Kit kit) {
-        BrawlProfile profile = BrawlProfile.get(player);
-
-        if(!profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
-            return;
-        }
-
-        if(profile.ownsKit(kit)) {
-            kit.apply(player);
-        } else {
-            player.sendMessage(ColorUtil.translateColors("&cYou don't own that kit, but it with /kits."));
-        }
-
-    }
-
 }

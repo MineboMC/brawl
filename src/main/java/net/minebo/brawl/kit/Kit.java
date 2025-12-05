@@ -42,9 +42,13 @@ public abstract class Kit implements Listener {
         return null;
     }
 
+    public static Boolean freeKitMode;
+
     public static void init() {
         registerKits();
         registerCooldowns();
+
+        freeKitMode = Brawl.getInstance().getConfig().getBoolean("manage.freekitsmode", false);
     }
 
     public Boolean hasKitOn(Player player) {

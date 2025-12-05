@@ -93,6 +93,7 @@ public class Brawl extends JavaPlugin {
     @Override
     public void onDisable() {
         BrawlProfile.profiles.values().forEach(BrawlProfile::save);
+        saveConfig();
     }
 
 }

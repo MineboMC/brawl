@@ -25,6 +25,10 @@ public class BrawlListener implements Listener {
             Bukkit.broadcast(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &6joined."), "");
         }
 
+        if(Kit.freeKitMode) {
+            event.getPlayer().sendMessage(ColorUtil.translateColors("&eAll kits are currently free, try them out!"));
+        }
+
         // If not already in memory, attempt DB lookup (should rarely happen if pre-load works)
         if (profile == null) {
             Document doc = net.minebo.brawl.Brawl.getInstance()

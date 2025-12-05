@@ -5,3 +5,6 @@ scoreboard:
 mongo:
   uri: "mongodb://localhost:27017"
   database: "Brawl"
+
+manage:
+  freekitsmode: false
