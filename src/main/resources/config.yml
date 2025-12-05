@@ -1,0 +1,7 @@
+scoreboard:
+  title: "&6&lBRAWL &c[Beta]"
+  url: "&eminebo.net"
+
+mongo:
+  uri: "mongodb://localhost:27017"
+  database: "Brawl"
