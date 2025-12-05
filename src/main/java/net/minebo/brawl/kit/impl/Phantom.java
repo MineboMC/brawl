@@ -102,7 +102,7 @@ public class Phantom extends Kit {
                 return;
             }
 
-            cd.applyCooldown(player, 30, TimeUnit.SECONDS, Brawl.getInstance());
+            cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
 
             player.setAllowFlight(true);
             player.setFlying(true);

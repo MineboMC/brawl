@@ -2,11 +2,14 @@ package net.minebo.brawl.cobalt;
 
 import net.md_5.bungee.api.ChatColor;
 import net.minebo.brawl.Brawl;
+import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.cooldown.construct.Cooldown;
 import net.minebo.cobalt.scoreboard.provider.ScoreboardProvider;
+import net.minebo.cobalt.timer.Timer;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ServerUtil;
+import net.minebo.cobalt.util.TimeUtil;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -72,7 +75,15 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(pvpTag != null) {
             if (pvpTag.onCooldown(player)) {
-                lines.add(ColorUtil.translateHexColors("&c&lPvP Tag&c: &f" + pvpTag.getRemaining(player)));
+                lines.add(ColorUtil.translateHexColors("&cPvP Tag&c: &f" + pvpTag.getRemaining(player)));
+            }
+        }
+
+        if(SpawnTimer.spawnTasks.containsKey(player.getUniqueId())) {
+            Timer.Task task = SpawnTimer.spawnTasks.get(player.getUniqueId());
+
+            if(TimeUtil.longToTime(task.getTime()) != "0") {
+                lines.add(ColorUtil.translateColors("&3Spawn: &f" + TimeUtil.longToTime(task.getTime())));
             }
         }
 

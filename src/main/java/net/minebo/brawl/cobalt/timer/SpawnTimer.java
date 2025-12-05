@@ -1,6 +1,8 @@
 package net.minebo.brawl.cobalt.timer;
 
+import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
+import net.minebo.brawl.spawn.SpawnHotbar;
 import net.minebo.cobalt.timer.Timer;
 import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.Bukkit;
@@ -40,17 +42,15 @@ public class SpawnTimer extends Timer {
         BrawlProfile profile = BrawlProfile.get(player);
 
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-        player.sendMessage(ColorUtil.translateColors("You have been teleported to spawn!"));
-        player.setHealth(20);
-        player.setFoodLevel(20);
-        player.setSaturation(20);
-
-
+        player.sendMessage(ColorUtil.translateColors("&eYou have been teleported to spawn!"));
 
         if (!profile.isSpawnProtected()) {
             profile.spawnProtected = true;
-            player.sendMessage(ColorUtil.translateColors("Your spawn protection has been enabled."));
+            player.sendMessage(ColorUtil.translateColors("&aYour spawn protection has been enabled."));
         }
+
+        Kit.clear(player);
+        SpawnHotbar.giveItems(player);
     }
 
     @EventHandler

@@ -8,8 +8,8 @@ import net.minebo.cobalt.cooldown.construct.Cooldown;
 import net.minebo.cobalt.projectile.ItemProjectile;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ItemBuilder;
-import org.bukkit.Color;
-import org.bukkit.DyeColor;
+import net.minebo.cobalt.util.LocationUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -106,7 +106,7 @@ public class Zeus extends Kit {
                 return;
             }
 
-            cd.applyCooldown(player, 30, TimeUnit.SECONDS, Brawl.getInstance());
+            cd.applyCooldown(player, 10, TimeUnit.SECONDS, Brawl.getInstance());
 
             new ItemProjectile(Brawl.getInstance(), Material.BLAZE_ROD, 2).shoot(player);
 
@@ -118,12 +118,20 @@ public class Zeus extends Kit {
         if (event.getProjectile().getItemStack().getType() != Material.BLAZE_ROD) return;
 
         Location loc = event.getProjectile().getLocation();
-        loc.getWorld().strikeLightningEffect(loc); // lightning visuals, no fire
 
-        // Deal damage if we hit a player
-        if (event.getHitEntity() instanceof Player hitPlayer) {
-            Player shooter = event.getShooter();
-            hitPlayer.damage(20.0, shooter);
+        List<Player> players = LocationUtil.getNearbyPlayers(loc, 3);
+
+        if(players.contains(event.getShooter())) players.remove(event.getShooter());
+
+        if(players.isEmpty()) {
+            loc.getWorld().strikeLightningEffect(loc);
+        } else {
+            players.forEach(player -> {
+                player.getLocation().getWorld().strikeLightningEffect(player.getLocation());
+
+                Player shooter = event.getShooter();
+                player.damage(20.0, shooter);
+            });
         }
     }
 

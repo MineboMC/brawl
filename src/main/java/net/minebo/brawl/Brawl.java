@@ -7,10 +7,7 @@ import net.minebo.brawl.cobalt.completion.KitCompletionHandler;
 import net.minebo.brawl.cobalt.context.KitContextResolver;
 import net.minebo.brawl.cobalt.cooldown.CombatTagCooldown;
 import net.minebo.brawl.kit.Kit;
-import net.minebo.brawl.listener.BrawlListener;
-import net.minebo.brawl.listener.DeathListener;
-import net.minebo.brawl.listener.ProtectionListener;
-import net.minebo.brawl.listener.SoupListener;
+import net.minebo.brawl.listener.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.listener.SpawnItemListener;
 import net.minebo.cobalt.acf.ACFCommandController;
@@ -85,6 +82,7 @@ public class Brawl extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new ProtectionListener(), this);
         Bukkit.getPluginManager().registerEvents(new DeathListener(), this);
         Bukkit.getPluginManager().registerEvents(new SoupListener(), this);
+        Bukkit.getPluginManager().registerEvents(new SpongeListener(), this);
 
         // Spawn
         Bukkit.getPluginManager().registerEvents(new SpawnItemListener(), this);

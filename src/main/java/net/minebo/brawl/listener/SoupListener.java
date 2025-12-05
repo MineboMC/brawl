@@ -76,7 +76,7 @@ public class SoupListener implements Listener {
             return;
         }
 
-        if(event.getItemDrop().getItemStack().getType() == Material.BOWL && event.getItemDrop().getItemStack().getType() == Material.MUSHROOM_STEW) {
+        if(event.getItemDrop().getItemStack().getType() == Material.BOWL || event.getItemDrop().getItemStack().getType() == Material.MUSHROOM_STEW) {
             event.getItemDrop().remove();
         }
     }

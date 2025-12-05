@@ -33,7 +33,7 @@ public class DeathListener implements Listener {
         victimProfile.deaths.add(1);
         victimProfile.killstreak.set(0);
 
-        e.getEntity().sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + "&c!"));
+        e.getEntity().sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!"));
         killer.sendMessage(ColorUtil.translateColors("&7You got 10 coins for killing " + e.getEntity().getDisplayName() + "&7!"));
 
         killerProfile.money.add(10);
@@ -46,6 +46,13 @@ public class DeathListener implements Listener {
         }
 
         e.setDeathMessage(null);
+
+        BrawlProfile profile =  BrawlProfile.get(e.getEntity());
+
+        profile.deaths.add(1);
+        profile.killstreak.set(0);
+
+        e.getEntity().sendMessage(ColorUtil.translateColors("&cYou died."));
     }
 
 }

@@ -112,7 +112,7 @@ public class Stomper extends Kit implements Listener {
             return;
         }
         // Launch up
-        cd.applyCooldown(player, 10, TimeUnit.SECONDS, Brawl.getInstance());
+        cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
         Vector velocity = new Vector(0, 3.0, 0);
         player.setVelocity(velocity);
         player.setMetadata(STOMPER_METADATA, new FixedMetadataValue(Brawl.getInstance(), true));
