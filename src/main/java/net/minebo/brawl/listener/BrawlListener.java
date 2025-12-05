@@ -4,6 +4,7 @@ import com.mongodb.client.model.Filters;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
+import net.minebo.cobalt.util.ColorUtil;
 import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -17,6 +18,12 @@ public class BrawlListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         BrawlProfile profile = BrawlProfile.get(event.getPlayer());
+
+        event.setJoinMessage(null);
+
+        if(Bukkit.getOnlinePlayers().size() <= 20) {
+            Bukkit.broadcast(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &6joined."), "");
+        }
 
         // If not already in memory, attempt DB lookup (should rarely happen if pre-load works)
         if (profile == null) {
@@ -42,7 +49,7 @@ public class BrawlListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-        event.getPlayer().setRespawnLocation(Bukkit.getWorlds().getFirst().getSpawnLocation());
+        event.setRespawnLocation(Bukkit.getWorlds().getFirst().getSpawnLocation());
 
         BrawlProfile.get(event.getPlayer()).spawnProtected = true;
 
@@ -53,6 +60,12 @@ public class BrawlListener implements Listener {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         BrawlProfile profile = BrawlProfile.get(event.getPlayer());
+
+        event.setQuitMessage(null);
+
+        if(Bukkit.getOnlinePlayers().size() <= 20) {
+            Bukkit.broadcast(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &6left."), "");
+        }
 
         profile.save();
     }

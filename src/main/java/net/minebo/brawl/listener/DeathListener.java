@@ -2,6 +2,7 @@ package net.minebo.brawl.listener;
 
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.util.ColorUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,15 +12,15 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent e){
-        if(!(e.getEntity().getKiller() instanceof Player)){
+        if(e.getEntity().getKiller() == null){
             return;
         }
 
         e.setDeathMessage(null);
 
-        Player killer = (Player) e.getEntity().getKiller();
-        BrawlProfile killerProfile = (BrawlProfile) e.getEntity().getKiller();
-        BrawlProfile victimProfile = (BrawlProfile) e.getEntity().getKiller();
+        Player killer = e.getEntity().getKiller();
+        BrawlProfile killerProfile = BrawlProfile.get(e.getEntity().getKiller());
+        BrawlProfile victimProfile = BrawlProfile.get(e.getEntity());
 
         killerProfile.kills.add(1);
         killerProfile.killstreak.add(1);
@@ -40,7 +41,7 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void onEnvironmentalDeath(PlayerDeathEvent e){
-        if(e.getEntity().getKiller() instanceof Player){
+        if(e.getEntity().getKiller() != null){
             return;
         }
 
