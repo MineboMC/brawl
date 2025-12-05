@@ -57,7 +57,7 @@ public class GeneralCommands extends BaseCommand {
             return; // dont potato and let them spam spawn
         }
 
-        new SpawnTimer(player, Brawl.getInstance());
+        new SpawnTimer(player, Brawl.getInstance()).start();
     }
 
 }
