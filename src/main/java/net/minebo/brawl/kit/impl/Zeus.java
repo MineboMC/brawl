@@ -41,7 +41,7 @@ public class Zeus extends Kit {
 
     @Override
     public String getDescription() {
-        return "Shoot lightning bolts at players.";
+        return "Shoot lightning at your enemies!";
     }
 
     @Override
@@ -114,7 +114,7 @@ public class Zeus extends Kit {
     }
 
     @EventHandler
-    public void onBoltHit(ItemProjectile.CustomItemProjectileHitEvent event) {
+    public void onBoltHit(ItemProjectile.ItemProjectileHitEvent event) {
         if (event.getProjectile().getItemStack().getType() != Material.BLAZE_ROD) return;
 
         Location loc = event.getProjectile().getLocation();

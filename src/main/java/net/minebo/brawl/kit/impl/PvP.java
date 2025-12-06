@@ -29,7 +29,7 @@ public class PvP extends Kit {
 
     @Override
     public String getDescription() {
-        return "The default pvp kit.";
+        return "The standard pvp kit!";
     }
 
     @Override

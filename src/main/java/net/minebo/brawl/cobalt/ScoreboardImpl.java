@@ -113,6 +113,14 @@ public class ScoreboardImpl extends ScoreboardProvider {
             }
         }
 
+        Cooldown melon = Brawl.getInstance().getCooldownHandler().getCooldown("Melon Toss");
+
+        if(melon != null) {
+            if(melon.onCooldown(player)) {
+                lines.add(ChatColor.of("#7FCC19") + "Melon Toss: &f" + melon.getRemaining(player));
+            }
+        }
+
         lines.add("");
 
         return lines;

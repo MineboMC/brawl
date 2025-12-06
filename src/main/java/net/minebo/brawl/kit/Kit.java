@@ -75,7 +75,7 @@ public abstract class Kit implements Listener {
         inv.setLeggings(getArmor().get(2));
         inv.setBoots(getArmor().get(3));
 
-        fillInvWithSoup(player.getInventory());
+        fillInvWithSoup(player);
 
         getEffects().forEach(player::addPotionEffect);
 
@@ -113,6 +113,18 @@ public abstract class Kit implements Listener {
         }
     }
 
+    public static void fillInvWithSoup(Player player) {
+        PlayerInventory playerInventory = player.getInventory();
+
+        for(int i = 0; i < playerInventory.getSize(); i++) {
+            ItemStack item = playerInventory.getItem(i);
+            if(item == null) playerInventory.setItem(i, new ItemStack(Material.MUSHROOM_STEW));
+        }
+
+        playerInventory.setItemInOffHand(null);
+        player.updateInventory();
+    }
+
     public void register() {
         Kit.kits.add(this);
         Bukkit.getPluginManager().registerEvents(this, Brawl.getInstance());
@@ -123,12 +135,14 @@ public abstract class Kit implements Listener {
         new Phantom().register();
         new Zeus().register();
         new Stomper().register();
+        new Melon().register();
     }
 
     public static void registerCooldowns() {
         Brawl.getInstance().getCooldownHandler().registerCooldown("Flight", new Cooldown());
         Brawl.getInstance().getCooldownHandler().registerCooldown("Bolt", new Cooldown());
         Brawl.getInstance().getCooldownHandler().registerCooldown("Stomp", new Cooldown());
+        Brawl.getInstance().getCooldownHandler().registerCooldown("Melon Toss", new Cooldown());
     }
 
 }

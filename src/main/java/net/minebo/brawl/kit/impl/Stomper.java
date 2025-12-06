@@ -42,7 +42,7 @@ public class Stomper extends Kit implements Listener {
     public ChatColor getColor() { return ChatColor.of("#FF0000"); }
 
     @Override
-    public String getDescription() { return "Stomp on players to kill them."; }
+    public String getDescription() { return "Stomp on your enemies to kill them!"; }
 
     @Override
     public Integer getPrice() { return 100; }

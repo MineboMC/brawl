@@ -39,7 +39,7 @@ public class Phantom extends Kit {
 
     @Override
     public String getDescription() {
-        return "Fly for 5 seconds.";
+        return "Soar through the sky like a Phantom!";
     }
 
     @Override
