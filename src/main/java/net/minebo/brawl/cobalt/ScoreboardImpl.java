@@ -121,6 +121,22 @@ public class ScoreboardImpl extends ScoreboardProvider {
             }
         }
 
+        Cooldown watergun = Brawl.getInstance().getCooldownHandler().getCooldown("Water Gun");
+
+        if(watergun != null) {
+            if(watergun.onCooldown(player)) {
+                lines.add(ChatColor.AQUA + "Water Gun: &f" + watergun.getRemaining(player));
+            }
+        }
+
+        Cooldown jump = Brawl.getInstance().getCooldownHandler().getCooldown("Avatar Jump");
+
+        if(jump != null) {
+            if(jump.onCooldown(player)) {
+                lines.add(ChatColor.YELLOW + "Jump: &f" + jump.getRemaining(player));
+            }
+        }
+
         lines.add("");
 
         return lines;

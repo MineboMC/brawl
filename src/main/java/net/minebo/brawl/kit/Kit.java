@@ -136,6 +136,7 @@ public abstract class Kit implements Listener {
         new Zeus().register();
         new Stomper().register();
         new Melon().register();
+        new Avatar().register();
     }
 
     public static void registerCooldowns() {
@@ -143,6 +144,8 @@ public abstract class Kit implements Listener {
         Brawl.getInstance().getCooldownHandler().registerCooldown("Bolt", new Cooldown());
         Brawl.getInstance().getCooldownHandler().registerCooldown("Stomp", new Cooldown());
         Brawl.getInstance().getCooldownHandler().registerCooldown("Melon Toss", new Cooldown());
+        Brawl.getInstance().getCooldownHandler().registerCooldown("Water Gun", new Cooldown());
+        Brawl.getInstance().getCooldownHandler().registerCooldown("Avatar Jump", new Cooldown());
     }
 
 }

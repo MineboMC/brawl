@@ -25,7 +25,7 @@ public class PvP extends Kit {
     }
 
     @Override
-    public ChatColor getColor() { return ChatColor.AQUA; }
+    public ChatColor getColor() { return ChatColor.YELLOW; }
 
     @Override
     public String getDescription() {
