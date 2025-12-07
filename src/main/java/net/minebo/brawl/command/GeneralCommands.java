@@ -1,18 +1,17 @@
 package net.minebo.brawl.command;
 
 import co.aikar.commands.BaseCommand;
-import co.aikar.commands.annotation.CommandAlias;
-import co.aikar.commands.annotation.CommandPermission;
-import co.aikar.commands.annotation.Default;
-import co.aikar.commands.annotation.Description;
+import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.minebo.brawl.Brawl;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
+import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -58,6 +57,47 @@ public class GeneralCommands extends BaseCommand {
         }
 
         new SpawnTimer(player, Brawl.getInstance()).start();
+    }
+
+    @CommandAlias("stats|statistics")
+    @Description("Check a player's stats.")
+    public void statsCommand(Player player) {
+        BrawlProfile profile = BrawlProfile.get(player);
+        if (profile == null) {
+            return;
+        }
+
+        player.sendMessage("");
+        player.sendMessage(ColorUtil.translateColors("&e&lYour Stats:"));
+        player.sendMessage(ColorUtil.translateColors("&eLast Used Kit: " + Kit.get(profile.lastKit).getColoredName()));
+        player.sendMessage(ColorUtil.translateColors("&eKills: &f" + profile.kills));
+        player.sendMessage(ColorUtil.translateColors("&eDeaths: &f" + profile.deaths));
+        player.sendMessage(ColorUtil.translateColors("&eMoney: &2$&a" + profile.money));
+        player.sendMessage(ColorUtil.translateColors("&eKillstreak: &f" + profile.killstreak));
+        player.sendMessage(ColorUtil.translateColors("&eHighest Killstreak: &f" + profile.highestkillstreak));
+        player.sendMessage("");
+    }
+
+    @CommandAlias("stats|statistics")
+    @Description("Check a player's stats.")
+    @CommandCompletion("@players")
+    @Syntax("<player>")
+    public void statsElseCommand(Player player, OfflinePlayer offlinePlayer) {
+        BrawlProfile profile = BrawlProfile.get(offlinePlayer.getUniqueId());
+        if (profile == null) {
+            player.sendMessage(ColorUtil.translateColors("&cThat player has not played this Season."));
+            return;
+        }
+
+        player.sendMessage("");
+        player.sendMessage(ColorUtil.translateColors(offlinePlayer.getName() + "&e&l's Stats:"));
+        player.sendMessage(ColorUtil.translateColors("&eLast Used Kit: " + Kit.get(profile.lastKit).getColoredName()));
+        player.sendMessage(ColorUtil.translateColors("&eKills: &f" + profile.kills));
+        player.sendMessage(ColorUtil.translateColors("&eDeaths: &f" + profile.deaths));
+        player.sendMessage(ColorUtil.translateColors("&eMoney: &2$&a" + profile.money));
+        player.sendMessage(ColorUtil.translateColors("&eKillstreak: &f" + profile.killstreak));
+        player.sendMessage(ColorUtil.translateColors("&eHighest Killstreak: &f" + profile.highestkillstreak));
+        player.sendMessage("");
     }
 
 }

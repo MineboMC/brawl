@@ -57,6 +57,10 @@ public class SpawnTimer extends Timer {
     public void onMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
+        if(event.hasChangedOrientation()) {
+            return;
+        }
+
         if(spawnTasks.containsKey(player.getUniqueId())) {
             player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you moved."));
             spawnTasks.remove(player.getUniqueId());
