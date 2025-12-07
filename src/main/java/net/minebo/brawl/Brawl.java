@@ -10,6 +10,7 @@ import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.listener.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.listener.SpawnItemListener;
+import net.minebo.brawl.task.TipTask;
 import net.minebo.cobalt.acf.ACFCommandController;
 import net.minebo.cobalt.acf.ACFManager;
 import net.minebo.cobalt.cooldown.CooldownHandler;
@@ -21,6 +22,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.List;
 
@@ -32,6 +34,8 @@ public class Brawl extends JavaPlugin {
 
     @Getter @Setter public MongoHandler mongoHandler;
     @Getter @Setter public CooldownHandler cooldownHandler;
+
+    @Getter public TipTask tipTask;
 
     @Override
     public void onEnable() {
@@ -60,6 +64,9 @@ public class Brawl extends JavaPlugin {
 
         registerListeners();
         setupEnvironment();
+
+        tipTask = new TipTask();
+        tipTask.runTaskTimer(this, 30 * 20L, 6000L);
     }
 
     public void setupEnvironment() {

@@ -8,12 +8,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.HashMap;
 
 public class DeathListener implements Listener {
 
     public HashMap<Player, Player> LAST_HITS = new HashMap<>();
+
+    @EventHandler
+    public void onPlayerFallVoid(PlayerMoveEvent e) {
+        if(e.getTo().getY() <= 60) {
+            e.getPlayer().damage(9000); // arbitrary big number
+        }
+    }
 
     @EventHandler
     public void onPlayerHit(EntityDamageByEntityEvent e) {

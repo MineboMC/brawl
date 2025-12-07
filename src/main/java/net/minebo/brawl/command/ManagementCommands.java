@@ -25,6 +25,7 @@ public class ManagementCommands extends BaseCommand {
     @Description("Toggles kits being free.")
     public void freeKitsCommand(CommandSender sender) {
         Kit.freeKitMode = !Kit.freeKitMode;
+        Brawl.getInstance().getTipTask().generateTips();
         Bukkit.broadcastMessage("");
         Bukkit.broadcastMessage(ColorUtil.translateColors("&eAll kits are " + (Kit.freeKitMode ? "now" : "no longer") + " free!"));
         Bukkit.broadcastMessage("");
