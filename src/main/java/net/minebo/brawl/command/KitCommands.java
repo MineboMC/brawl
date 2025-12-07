@@ -7,6 +7,7 @@ import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.minebo.brawl.Brawl;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
+import net.minebo.brawl.spawn.SpawnHotbar;
 import net.minebo.brawl.spawn.listener.SpawnItemListener;
 import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.command.CommandSender;
@@ -33,7 +34,20 @@ public class KitCommands extends BaseCommand {
         }
 
         SpawnItemListener.openKitMenu(player);
+    }
 
+    @CommandAlias("clearkit|ck")
+    @Description("Clears your kit.")
+    public void clearKitCommand(Player player) {
+        BrawlProfile profile = BrawlProfile.get(player);
+
+        if(!profile.isSpawnProtected()) {
+            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
+            return;
+        }
+
+        Kit.clear(player);
+        SpawnHotbar.giveItems(player);
     }
 
 }
