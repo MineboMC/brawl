@@ -109,9 +109,9 @@ public class Avatar extends Kit {
                 player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
                 return;
             }
-            cd.applyCooldown(player, 30, TimeUnit.SECONDS, Brawl.getInstance());
+            cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 1);
-            new BlockProjectile(Brawl.getInstance(), Material.WATER, 2)
+            new BlockProjectile(Brawl.getInstance(), Material.ICE, 2)
                     .withMetadata("WATER_GUN")
                     .shoot(player);
         }
@@ -206,7 +206,7 @@ public class Avatar extends Kit {
             player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
             return;
         }
-        cd.applyCooldown(player, 45, TimeUnit.SECONDS, Brawl.getInstance());
+        cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
 
         player.setVelocity(player.getLocation().getDirection().normalize().multiply(2));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_LARGE_BLAST, 1, 1);
@@ -241,15 +241,10 @@ public class Avatar extends Kit {
         Entity entity = event.getEntity();
         // Avatar jump custom fall damage
         if (entity instanceof Player player && event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-            if (noFallDamage.remove(player.getUniqueId())) {
+            if (hasKitOn(player)) {
                 event.setCancelled(true);
             }
         }
-    }
-
-    @EventHandler
-    public void onPlayerQuitEvent(PlayerQuitEvent event) {
-        noFallDamage.remove(event.getPlayer().getUniqueId());
     }
 
 }

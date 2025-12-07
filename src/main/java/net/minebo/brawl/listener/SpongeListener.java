@@ -3,6 +3,7 @@ package net.minebo.brawl.listener;
 import net.minebo.brawl.Brawl;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,6 +38,7 @@ public class SpongeListener implements Listener {
         // Player just stepped onto a sponge
         if ((below == Material.SPONGE || below == Material.WET_SPONGE) && before != below) {
 
+            player.playSound(player.getLocation(), Sound.ENTITY_CHICKEN_EGG, 1.0F, 1.0F);
             // Launch upward (keeps horizontal momentum)
             Vector current = player.getVelocity();
             player.setVelocity(new Vector(current.getX(), upwardVelocity, current.getZ()));

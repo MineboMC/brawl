@@ -139,15 +139,14 @@ public class Melon extends Kit {
 
         Player victim;
 
-        if (victimEntity instanceof Player) {
+        Player nearestPlayer = LocationUtil.getNearestPlayer(event.getHitLocation(), 3);
+
+        if (victimEntity != null) {
             victim = (Player) victimEntity;
-        } else if (victimEntity == null) {
-            // Try to find the nearest player to the projectile within 3 blocks (or adjust radius)
-            victim = LocationUtil.getNearestPlayer(projectile.getLocation(), 3.0);
-            if (victim == null) return; // If none found, do nothing
+        } else if(nearestPlayer != null) {
+            victim = nearestPlayer;
         } else {
-            victim = null;
-            return; // If an entity exists, but not a player, ignore
+            return;
         }
 
         // Ensure the projectile is a melon and hit an entity/player or found nearest
@@ -173,8 +172,8 @@ public class Melon extends Kit {
 
             victim.damage(6, shooter); // damage value
             Vector unitVector = projectile.getVelocity().normalize();
-            Vector velocity = unitVector.multiply(3.6);
-            velocity.setY(2.4);
+            Vector velocity = unitVector.multiply(3);
+            velocity.setY(1.6);
 
             Bukkit.getScheduler().runTaskLater(Brawl.getInstance(), () -> {
                 victim.setVelocity(velocity);
