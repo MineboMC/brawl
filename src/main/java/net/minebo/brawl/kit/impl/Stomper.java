@@ -33,7 +33,9 @@ public class Stomper extends Kit implements Listener {
     private static final String STOMPER_METADATA = "StomperCharge";
 
     @Override
-    public Material getIcon() { return Material.ANVIL; }
+    public ItemStack getIcon() {
+        return new ItemStack(Material.ANVIL);
+    }
 
     @Override
     public String getName() { return "Stomper"; }

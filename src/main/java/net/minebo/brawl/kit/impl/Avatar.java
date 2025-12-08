@@ -39,9 +39,7 @@ public class Avatar extends Kit {
     private final Set<UUID> noFallDamage = new HashSet<>();
 
     @Override
-    public Material getIcon() {
-        return Material.BEACON;
-    }
+    public ItemStack getIcon() { return new ItemStack(Material.BEACON); }
 
     @Override
     public String getName() { return "Avatar"; }
@@ -186,6 +184,7 @@ public class Avatar extends Kit {
 
     @EventHandler
     public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
+        if(event.getPlayer().isOnGround()) return;
         if (!event.isSneaking()) return;
         Player player = event.getPlayer();
         if (!hasKitOn(player)) return;

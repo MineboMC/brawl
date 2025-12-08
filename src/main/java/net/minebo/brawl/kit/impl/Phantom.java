@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class Phantom extends Kit {
 
     @Override
-    public Material getIcon() {
-        return Material.PHANTOM_MEMBRANE;
+    public ItemStack getIcon() {
+        return new ItemStack(Material.PHANTOM_MEMBRANE);
     }
 
     @Override

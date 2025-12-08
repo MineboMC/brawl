@@ -23,7 +23,7 @@ public abstract class Kit implements Listener {
 
     public static List<Kit> kits = new ArrayList<>();
 
-    public abstract Material getIcon();
+    public abstract ItemStack getIcon();
     public abstract String getName();
     public abstract ChatColor getColor();
     public abstract String getDescription();
@@ -137,6 +137,8 @@ public abstract class Kit implements Listener {
         new Stomper().register();
         new Melon().register();
         new Avatar().register();
+        new Chemist().register();
+        new Palioxis().register();
     }
 
     public static void registerCooldowns() {

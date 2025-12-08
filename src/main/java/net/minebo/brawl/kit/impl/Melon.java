@@ -39,8 +39,8 @@ public class Melon extends Kit {
     private static final String MELON_METADATA = "Melon";
 
     @Override
-    public Material getIcon() {
-        return Material.MELON_SLICE;
+    public ItemStack getIcon() {
+        return new ItemStack(Material.MELON_SLICE);
     }
 
     @Override

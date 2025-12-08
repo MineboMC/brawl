@@ -9,7 +9,6 @@ import net.minebo.cobalt.projectile.ItemProjectile;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ItemBuilder;
 import net.minebo.cobalt.util.LocationUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -27,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 public class Zeus extends Kit {
 
     @Override
-    public Material getIcon() {
-        return Material.BLAZE_ROD;
+    public ItemStack getIcon() {
+        return new ItemStack(Material.BLAZE_ROD);
     }
 
     @Override

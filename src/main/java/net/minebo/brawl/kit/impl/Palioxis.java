@@ -11,25 +11,24 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
-// use this as a template for all kits
-public class PvP extends Kit {
+public class Palioxis extends Kit {
 
     @Override
     public ItemStack getIcon() {
-        return new ItemStack(Material.DIAMOND_SWORD);
+        return new ItemStack(Material.ENDER_PEARL);
     }
 
     @Override
     public String getName() {
-        return "PvP";
+        return "Palioxis";
     }
 
     @Override
-    public ChatColor getColor() { return ChatColor.YELLOW; }
+    public ChatColor getColor() { return ChatColor.of("#95F5E3"); }
 
     @Override
     public String getDescription() {
-        return "The standard pvp kit!";
+        return "Use pearls to confuse your enemies!";
     }
 
     @Override
@@ -37,10 +36,11 @@ public class PvP extends Kit {
 
     @Override
     public List<ItemStack> getDefaultItems() {
-        return List.of(new ItemBuilder(Material.DIAMOND_SWORD)
-                        .addEnchantment(Enchantment.SHARPNESS, 1)
-                        .setUnbreakable(true)
-                        .build()
+        return List.of(new ItemBuilder(Material.IRON_SWORD)
+                .addEnchantment(Enchantment.SHARPNESS, 1)
+                .setUnbreakable(true)
+                .build(),
+                new ItemStack(Material.ENDER_PEARL)
         );
     }
 
@@ -56,7 +56,7 @@ public class PvP extends Kit {
 
     @Override
     public List<PotionEffect> getEffects() {
-        return List.of(new PotionEffect(PotionEffectType.SPEED, -1, 0));
+        return List.of(new PotionEffect(PotionEffectType.SPEED, -1, 1));
     }
 
 }

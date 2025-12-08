@@ -4,8 +4,13 @@ import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.menu.construct.Button;
 import net.minebo.cobalt.util.ColorUtil;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +25,6 @@ public class KitButton extends Button {
         this.kit = kit;
 
         setName(() -> kit.getColoredName());
-        setMaterial(kit.getIcon());
         setLines(() -> getDescription());
 
         // Left-click action
@@ -58,5 +62,19 @@ public class KitButton extends Button {
         }
 
         return description;
+    }
+
+    @Override
+    public ItemStack build() {
+        ItemStack item = kit.getIcon();
+        ItemMeta meta = item.getItemMeta();
+
+        if (meta != null) {
+            meta.setDisplayName(this.name.get());
+            meta.setLore(this.lines.get());
+            item.setItemMeta(meta);
+        }
+
+        return item;
     }
 }
