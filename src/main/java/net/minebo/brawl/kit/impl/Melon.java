@@ -71,7 +71,7 @@ public class Melon extends Kit {
         return List.of(
                 new ItemBuilder(Material.MELON_SLICE)
                         .setName(ChatColor.YELLOW + "Melon Smacker")
-                        .addEnchantment(Enchantment.SHARPNESS, 8)
+                        .addEnchantment(Enchantment.SHARPNESS, 24) // cuz kitara reverts sharpness to 1.8
                         .setUnbreakable(true)
                         .build(),
                 getAbilityItem()
