@@ -145,7 +145,7 @@ public class DeathListener implements Listener {
 
         if(killStreak == null) return;
 
-        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " &ehas gotten their " + killStreak.getColor() + killStreak.getName() + " &e killstreak!")));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " &ehas gotten their " + killStreak.getColor() + killStreak.getName() + " &ekillstreak!")));
 
         killStreak.doReward(player);
     }

@@ -2,9 +2,7 @@ package net.minebo.brawl.killstreak;
 
 import net.md_5.bungee.api.ChatColor;
 import net.minebo.brawl.killstreak.buttons.KillStreakButton;
-import net.minebo.brawl.killstreak.impl.GoldenApples;
-import net.minebo.brawl.kit.Kit;
-import net.minebo.brawl.kit.menu.KitButton;
+import net.minebo.brawl.killstreak.impl.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.menu.construct.Menu;
 import net.minebo.cobalt.util.ColorUtil;
@@ -28,7 +26,8 @@ public abstract class KillStreak {
 
     public static void init() {
         killStreaks = List.of(
-                new GoldenApples()
+                new GoldenApples(),
+                new Debuffs()
         );
     }
 
