@@ -6,6 +6,7 @@ import net.minebo.brawl.cobalt.ScoreboardImpl;
 import net.minebo.brawl.cobalt.completion.KitCompletionHandler;
 import net.minebo.brawl.cobalt.context.KitContextResolver;
 import net.minebo.brawl.cobalt.cooldown.CombatTagCooldown;
+import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.listener.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
@@ -61,6 +62,7 @@ public class Brawl extends JavaPlugin {
         getCooldownHandler().registerCooldown("Free Soup", new Cooldown());
 
         Kit.init();
+        KillStreak.init();
 
         registerListeners();
         setupEnvironment();

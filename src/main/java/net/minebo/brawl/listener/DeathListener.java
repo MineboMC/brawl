@@ -1,5 +1,6 @@
 package net.minebo.brawl.listener;
 
+import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.impl.Chemist;
 import net.minebo.brawl.kit.impl.Palioxis;
 import net.minebo.brawl.mongo.model.BrawlProfile;
@@ -96,6 +97,7 @@ public class DeathListener implements Listener {
         killerProfile.money.add(10);
 
         handleKillerKit(killer, killerProfile);
+        handleKillStreak(killer, killerProfile.killstreak.get());
 
         if(LAST_HITS.containsKey(victim)){
             LAST_HITS.remove(victim);
@@ -136,6 +138,16 @@ public class DeathListener implements Listener {
 
             player.sendMessage(ColorUtil.translateColors("&7Your pearl has been replenished."));
         }
+    }
+
+    public void handleKillStreak(Player player, Integer killstreak) {
+        KillStreak killStreak = KillStreak.get(killstreak);
+
+        if(killStreak == null) return;
+
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " &ehas gotten their " + killStreak.getColor() + killStreak.getName() + " &e killstreak!")));
+
+        killStreak.doReward(player);
     }
 
 }

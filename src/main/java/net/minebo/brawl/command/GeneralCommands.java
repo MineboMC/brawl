@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import co.aikar.commands.bukkit.contexts.OnlinePlayer;
 import net.minebo.brawl.Brawl;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
+import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
@@ -98,6 +99,12 @@ public class GeneralCommands extends BaseCommand {
         player.sendMessage(ColorUtil.translateColors("&eKillstreak: &f" + profile.killstreak));
         player.sendMessage(ColorUtil.translateColors("&eHighest Killstreak: &f" + profile.highestkillstreak));
         player.sendMessage("");
+    }
+
+    @CommandAlias("killstreak|killstreaks|ks")
+    @Description("Opens the killstreak menu.")
+    public void killStreaksCommand(Player player) {
+        KillStreak.openMenu(player);
     }
 
 }
