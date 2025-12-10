@@ -6,6 +6,7 @@ import co.aikar.commands.annotation.*;
 import net.minebo.brawl.Brawl;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
+import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -41,6 +42,17 @@ public class ManagementCommands extends BaseCommand {
     public void testKillStreakCommand(Player sender, Integer ks) {
         sender.sendMessage(ColorUtil.translateColors("&aIf there is a ks for &e" + ks + " &ait will be rewarded to " + sender.getDisplayName() + "&a!"));
         KillStreak.handleKillStreak(sender, ks);
+    }
+
+    @Subcommand("metrics")
+    @CommandPermission("brawl.manage")
+    @Description("Toggles kits being free.")
+    public void metricsCommand(CommandSender sender) { // more soon
+        sender.sendMessage(ColorUtil.translateColors("&rBrawl Metrics:"));
+        sender.sendMessage(ColorUtil.translateColors("&7Profiles: &f" + BrawlProfile.profiles.size()));
+        sender.sendMessage(ColorUtil.translateColors("&7Total Kills: &f" + BrawlProfile.getAllKills()));
+        sender.sendMessage(ColorUtil.translateColors("&7Total Deaths: &f" + BrawlProfile.getAllDeaths()));
+        sender.sendMessage(ColorUtil.translateColors("&7Total Money: &2$&a" + BrawlProfile.getAllMoney()));
     }
 
 }

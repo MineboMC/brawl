@@ -108,6 +108,36 @@ public class BrawlProfile {
         return profiles.get(uniqueId);
     }
 
+    public static Integer getAllKills() {
+        Integer kills = 0;
+
+        for(BrawlProfile profile : profiles.values()) {
+            kills += profile.kills.get();
+        }
+
+        return kills;
+    }
+
+    public static Integer getAllDeaths() {
+        Integer deaths = 0;
+
+        for(BrawlProfile profile : profiles.values()) {
+            deaths += profile.deaths.get();
+        }
+
+        return deaths;
+    }
+
+    public static Integer getAllMoney() {
+        Integer money = 0;
+
+        for(BrawlProfile profile : profiles.values()) {
+            money += profile.money.get();
+        }
+
+        return money;
+    }
+
     public Boolean ownsKit(Kit kit) {
         return kit.getPrice() == 0 || ownedKits.contains(kit.getName()) || Kit.freeKitMode;
     }
