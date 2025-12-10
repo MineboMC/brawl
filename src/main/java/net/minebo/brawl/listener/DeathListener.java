@@ -57,7 +57,7 @@ public class DeathListener implements Listener {
                 }
             }
 
-        }.runTaskLater(Brawl.getInstance(), 20);
+        }.runTaskLater(Brawl.getInstance(), 20 * 20);
 
     }
 
