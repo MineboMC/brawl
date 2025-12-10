@@ -1,10 +1,12 @@
 package net.minebo.brawl.listener;
 
+import net.minebo.brawl.Brawl;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.kit.impl.Chemist;
 import net.minebo.brawl.kit.impl.Palioxis;
 import net.minebo.brawl.mongo.model.BrawlProfile;
+import net.minebo.cobalt.scheduler.Scheduler;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.PotionBuilder;
 import org.bukkit.Bukkit;
@@ -18,6 +20,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 
@@ -42,6 +45,20 @@ public class DeathListener implements Listener {
         Player victim = (Player) e.getEntity();
 
         LAST_HITS.put(victim, damager);
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if(LAST_HITS.containsKey(victim)) {
+                    if(LAST_HITS.get(victim).equals(damager)) {
+                        LAST_HITS.remove(victim);
+                    }
+                }
+            }
+
+        }.runTaskLater(Brawl.getInstance(), 20);
+
     }
 
     @EventHandler
@@ -92,7 +109,7 @@ public class DeathListener implements Listener {
         victimProfile.deaths.add(1);
         victimProfile.killstreak.set(0);
 
-        victim.sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!"));
+        victim.sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + ((killerProfile.getSelectedKit() != null ) ? " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!" : "&c!")));
         killer.sendMessage(ColorUtil.translateColors("&7You got 10 coins for killing " + victim.getDisplayName() + "&7!"));
 
         killerProfile.money.add(10);
