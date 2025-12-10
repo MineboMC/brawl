@@ -9,11 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class GoldenApples extends KillStreak {
+public class Gopple extends KillStreak {
 
     @Override
     public String getName() {
-        return "Golden Apples";
+        return "God Apple";
     }
 
     @Override
@@ -23,24 +23,24 @@ public class GoldenApples extends KillStreak {
 
     @Override
     public String getDescription() {
-        return "Gives you 3 Golden Apples.";
+        return "Gives you a god apple.";
     }
 
     @Override
     public ItemStack getIcon() {
-        return new ItemBuilder(Material.GOLDEN_APPLE).setSize(getKills()).build();
+        return new ItemBuilder(Material.ENCHANTED_GOLDEN_APPLE).setSize(getKills()).build();
     }
 
     @Override
     public Integer getKills() {
-        return 3;
+        return 35;
     }
 
     @Override
     public void doReward(Player player) {
         PlayerInventory inventory = player.getInventory();
 
-        inventory.setItem(InventoryUtil.getFirstEmptySlot(inventory, Material.MUSHROOM_STEW, Material.BOWL), new ItemBuilder(Material.GOLDEN_APPLE).setSize(3).build());
+        inventory.setItem(InventoryUtil.getFirstEmptySlot(inventory, Material.MUSHROOM_STEW, Material.BOWL), new ItemBuilder(Material.ENCHANTED_GOLDEN_APPLE).setSize(1).build());
     }
 
 }

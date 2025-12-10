@@ -1,6 +1,8 @@
 package net.minebo.brawl.killstreak.impl;
 
 import net.md_5.bungee.api.ChatColor;
+import net.minebo.brawl.Brawl;
+import net.minebo.brawl.cobalt.timer.NukeTimer;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.cobalt.util.InventoryUtil;
 import net.minebo.cobalt.util.ItemBuilder;
@@ -9,38 +11,36 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
-public class GoldenApples extends KillStreak {
+public class Nuke extends KillStreak {
 
     @Override
     public String getName() {
-        return "Golden Apples";
+        return "Nuke";
     }
 
     @Override
     public ChatColor getColor() {
-        return ChatColor.GOLD;
+        return ChatColor.DARK_RED;
     }
 
     @Override
     public String getDescription() {
-        return "Gives you 3 Golden Apples.";
+        return "Spawns a nuke.";
     }
 
     @Override
     public ItemStack getIcon() {
-        return new ItemBuilder(Material.GOLDEN_APPLE).setSize(getKills()).build();
+        return new ItemBuilder(Material.TNT).setSize(getKills()).build();
     }
 
     @Override
     public Integer getKills() {
-        return 3;
+        return 50;
     }
 
     @Override
     public void doReward(Player player) {
-        PlayerInventory inventory = player.getInventory();
-
-        inventory.setItem(InventoryUtil.getFirstEmptySlot(inventory, Material.MUSHROOM_STEW, Material.BOWL), new ItemBuilder(Material.GOLDEN_APPLE).setSize(3).build());
+        new NukeTimer(player, Brawl.getInstance()).start();
     }
 
 }

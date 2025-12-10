@@ -35,7 +35,7 @@ public class SpawnItemListener extends ItemListener {
     }
 
     public static void openKitMenu(Player player) {
-        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&dChoose your kit!")).setUpdateAfterClick(true);
+        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&e&lKits")).setUpdateAfterClick(true);
 
         BrawlProfile profile = BrawlProfile.get(player);
 

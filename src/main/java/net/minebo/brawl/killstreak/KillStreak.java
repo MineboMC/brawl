@@ -6,6 +6,7 @@ import net.minebo.brawl.killstreak.impl.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.menu.construct.Menu;
 import net.minebo.cobalt.util.ColorUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,7 +28,12 @@ public abstract class KillStreak {
     public static void init() {
         killStreaks = List.of(
                 new GoldenApples(),
-                new Debuffs()
+                new Debuffs(),
+                new Cobwebs(),
+                new Repair(),
+                new Gopple(),
+                new AttackDogs(),
+                new Nuke()
         );
     }
 
@@ -36,7 +42,7 @@ public abstract class KillStreak {
     }
 
     public static void openMenu(Player player) {
-        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&eKill Streaks"));
+        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&e&lKill Streaks"));
 
         BrawlProfile profile = BrawlProfile.get(player);
 
@@ -49,6 +55,16 @@ public abstract class KillStreak {
         }
 
         menu.openMenu(player);
+    }
+
+    public static void handleKillStreak(Player player, Integer killstreak) {
+        KillStreak killStreak = KillStreak.get(killstreak);
+
+        if(killStreak == null) return;
+
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " &ehas gotten their " + killStreak.getColor() + killStreak.getName() + " &ekillstreak!")));
+
+        killStreak.doReward(player);
     }
 
 }

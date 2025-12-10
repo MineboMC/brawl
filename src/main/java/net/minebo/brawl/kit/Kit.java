@@ -7,6 +7,7 @@ import net.minebo.brawl.kit.impl.*;
 
 import net.minebo.cobalt.cooldown.construct.Cooldown;
 import net.minebo.cobalt.util.ColorUtil;
+import net.minebo.cobalt.util.PotionBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,6 +125,29 @@ public abstract class Kit implements Listener {
 
         playerInventory.setItemInOffHand(null);
         player.updateInventory();
+    }
+
+    public static void handleKillerKit(Player player, BrawlProfile profile) {
+        Inventory inv =  player.getInventory();
+
+        if(profile.getSelectedKit() instanceof Chemist) {
+            inv.setItem(1, new PotionBuilder(Material.SPLASH_POTION)
+                    .setBasePotionType(PotionType.STRONG_HARMING)
+                    .setSize(3)
+                    .build());
+
+            inv.setItem(2, new PotionBuilder(Material.SPLASH_POTION)
+                    .setBasePotionType(PotionType.STRONG_POISON)
+                    .build());
+
+            player.sendMessage(ColorUtil.translateColors("&7Your potions have been replenished."));
+        }
+
+        if(profile.getSelectedKit() instanceof Palioxis) {
+            inv.setItem(1, new ItemStack(Material.ENDER_PEARL));
+
+            player.sendMessage(ColorUtil.translateColors("&7Your pearl has been replenished."));
+        }
     }
 
     public void register() {

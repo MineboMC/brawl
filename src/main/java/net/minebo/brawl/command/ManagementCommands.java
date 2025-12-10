@@ -4,6 +4,7 @@ import co.aikar.commands.BaseCommand;
 import co.aikar.commands.CommandHelp;
 import co.aikar.commands.annotation.*;
 import net.minebo.brawl.Brawl;
+import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.Bukkit;
@@ -31,6 +32,14 @@ public class ManagementCommands extends BaseCommand {
         Bukkit.broadcastMessage("");
         Brawl.getInstance().getConfig().set("manage.freekitsmode", Kit.freeKitMode);
         Brawl.getInstance().saveConfig();
+    }
+
+    @Subcommand("testks")
+    @CommandPermission("brawl.manage")
+    @Description("Toggles kits being free.")
+    public void testKillStreakCommand(Player sender, Integer ks) {
+        sender.sendMessage(ColorUtil.translateColors("&aIf there is a ks for &e" + ks + " &ait will be rewarded to " + sender.getDisplayName() + "&a!"));
+        KillStreak.handleKillStreak(sender, ks);
     }
 
 }

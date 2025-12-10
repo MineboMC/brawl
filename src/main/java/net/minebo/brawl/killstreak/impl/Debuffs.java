@@ -1,12 +1,9 @@
 package net.minebo.brawl.killstreak.impl;
 
-import com.github.retrooper.packetevents.protocol.potion.Potion;
 import net.md_5.bungee.api.ChatColor;
 import net.minebo.brawl.killstreak.KillStreak;
-import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.util.InventoryUtil;
-import net.minebo.cobalt.util.ItemBuilder;
 import net.minebo.cobalt.util.PotionBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -33,7 +30,7 @@ public class Debuffs extends KillStreak {
 
     @Override
     public ItemStack getIcon() {
-        return new PotionBuilder(Material.SPLASH_POTION).setBasePotionType(PotionType.POISON).setSize(7).build();
+        return new PotionBuilder(Material.SPLASH_POTION).setBasePotionType(PotionType.POISON).setSize(getKills()).build();
     }
 
     @Override
