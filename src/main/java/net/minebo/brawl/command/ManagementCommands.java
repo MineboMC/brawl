@@ -37,6 +37,7 @@ public class ManagementCommands extends BaseCommand {
     @Subcommand("testks")
     @CommandPermission("brawl.manage")
     @Description("Toggles kits being free.")
+    @Syntax("<value>")
     public void testKillStreakCommand(Player sender, Integer ks) {
         sender.sendMessage(ColorUtil.translateColors("&aIf there is a ks for &e" + ks + " &ait will be rewarded to " + sender.getDisplayName() + "&a!"));
         KillStreak.handleKillStreak(sender, ks);

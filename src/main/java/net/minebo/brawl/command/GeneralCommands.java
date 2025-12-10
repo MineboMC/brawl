@@ -83,22 +83,22 @@ public class GeneralCommands extends BaseCommand {
     @Description("Check a player's stats.")
     @CommandCompletion("@players")
     @Syntax("<player>")
-    public void statsElseCommand(Player player, OfflinePlayer offlinePlayer) {
+    public void statsElseCommand(CommandSender sender, OfflinePlayer offlinePlayer) {
         BrawlProfile profile = BrawlProfile.get(offlinePlayer.getUniqueId());
         if (profile == null) {
-            player.sendMessage(ColorUtil.translateColors("&cThat player has not played this Season."));
+            sender.sendMessage(ColorUtil.translateColors("&cThat player has not played this Season."));
             return;
         }
 
-        player.sendMessage("");
-        player.sendMessage(ColorUtil.translateColors(offlinePlayer.getName() + "&e&l's Stats:"));
-        player.sendMessage(ColorUtil.translateColors("&eLast Used Kit: " + Kit.get(profile.lastKit).getColoredName()));
-        player.sendMessage(ColorUtil.translateColors("&eKills: &f" + profile.kills));
-        player.sendMessage(ColorUtil.translateColors("&eDeaths: &f" + profile.deaths));
-        player.sendMessage(ColorUtil.translateColors("&eMoney: &2$&a" + profile.money));
-        player.sendMessage(ColorUtil.translateColors("&eKillstreak: &f" + profile.killstreak));
-        player.sendMessage(ColorUtil.translateColors("&eHighest Killstreak: &f" + profile.highestkillstreak));
-        player.sendMessage("");
+        sender.sendMessage("");
+        sender.sendMessage(ColorUtil.translateColors("&e&l" + offlinePlayer.getName() + "'s Stats:"));
+        sender.sendMessage(ColorUtil.translateColors("&eLast Used Kit: " + Kit.get(profile.lastKit).getColoredName()));
+        sender.sendMessage(ColorUtil.translateColors("&eKills: &f" + profile.kills));
+        sender.sendMessage(ColorUtil.translateColors("&eDeaths: &f" + profile.deaths));
+        sender.sendMessage(ColorUtil.translateColors("&eMoney: &2$&a" + profile.money));
+        sender.sendMessage(ColorUtil.translateColors("&eKillstreak: &f" + profile.killstreak));
+        sender.sendMessage(ColorUtil.translateColors("&eHighest Killstreak: &f" + profile.highestkillstreak));
+        sender.sendMessage("");
     }
 
     @CommandAlias("killstreak|killstreaks|ks")
