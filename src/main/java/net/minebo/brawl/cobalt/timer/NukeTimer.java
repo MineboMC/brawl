@@ -29,13 +29,13 @@ public class NukeTimer extends Timer {
     @Override
     protected void onStart() {
         // message to the nuke owner that their nuke countdown has started
-        player.sendMessage(ColorUtil.translateColors("&c&lTactical Nuke Incoming..."));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors("&c&lTactical Nuke Incoming...")));
     }
 
     @Override
     protected boolean onTick(int secondsLeft) {
         // Broadcast countdown message to all online players and play effects/sounds
-        String countdownMessage = ColorUtil.translateColors("&eTactical Nuke Incoming! &c" + secondsLeft + "...");
+        String countdownMessage = ColorUtil.translateColors("&c" + secondsLeft + "...");
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(countdownMessage);
 

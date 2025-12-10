@@ -98,6 +98,11 @@ public class DeathListener implements Listener {
             return;
         }
 
+        if(victimProfile.lastUsername == killerProfile.lastUsername) {
+            processDeath(victim);
+            return;
+        }
+
         killerProfile.kills.add(1);
         killerProfile.killstreak.add(1);
 
