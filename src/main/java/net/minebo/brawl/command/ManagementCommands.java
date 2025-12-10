@@ -48,11 +48,13 @@ public class ManagementCommands extends BaseCommand {
     @CommandPermission("brawl.manage")
     @Description("Toggles kits being free.")
     public void metricsCommand(CommandSender sender) { // more soon
-        sender.sendMessage(ColorUtil.translateColors("&rBrawl Metrics:"));
+        sender.sendMessage("");
+        sender.sendMessage(ColorUtil.translateColors("&4Brawl Metrics:"));
         sender.sendMessage(ColorUtil.translateColors("&7Profiles: &f" + BrawlProfile.profiles.size()));
         sender.sendMessage(ColorUtil.translateColors("&7Total Kills: &f" + BrawlProfile.getAllKills()));
         sender.sendMessage(ColorUtil.translateColors("&7Total Deaths: &f" + BrawlProfile.getAllDeaths()));
         sender.sendMessage(ColorUtil.translateColors("&7Total Money: &2$&a" + BrawlProfile.getAllMoney()));
+        sender.sendMessage("");
     }
 
 }

@@ -37,6 +37,7 @@ public class KitButton extends Button {
                     profile.money.sub(kit.getPrice());
                     profile.ownedKits.add(kit.getName());
                     player.sendMessage(ColorUtil.translateColors("&7You have purchased &a" + kit.getColoredName() + "&7."));
+                    profile.save();
                 } else {
                     player.sendMessage(ColorUtil.translateColors("&cYou do not have enough money for this kit."));
                 }

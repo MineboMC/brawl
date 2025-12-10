@@ -114,6 +114,9 @@ public class DeathListener implements Listener {
 
         killerProfile.money.add(10);
 
+        killerProfile.save();
+        victimProfile.save();
+
         Kit.handleKillerKit(killer, killerProfile);
         KillStreak.handleKillStreak(killer, killerProfile.killstreak.get());
 
@@ -131,6 +134,8 @@ public class DeathListener implements Listener {
 
         profile.deaths.add(1);
         profile.killstreak.set(0);
+
+        profile.save();
 
         victim.sendMessage(ColorUtil.translateColors("&cYou died."));
     }
