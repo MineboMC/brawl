@@ -13,14 +13,21 @@ import net.minebo.cobalt.util.ColorUtil;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-@CommandAlias("kit")
 public class KitCommands extends BaseCommand {
 
-    @Default
-    @CatchUnknown
-    @HelpCommand
-    public void helpCommand(CommandSender sender, CommandHelp help) {
-        help.showHelp();
+    @CommandAlias("kit")
+    @Description("Selects a kit.")
+    @Syntax("<kit>")
+    @CommandCompletion("@kits")
+    public void kitCommand(Player player, Kit kit) {
+        BrawlProfile profile = BrawlProfile.get(player);
+
+        if(!profile.isSpawnProtected()) {
+            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
+            return;
+        }
+
+        kit.apply(player);
     }
 
     @CommandAlias("kits")
