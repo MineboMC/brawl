@@ -9,5 +9,5 @@ mongo:
 manage:
   freekitsmode: false
 
-credits:
+extra-money:
   owner: 50

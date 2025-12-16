@@ -119,14 +119,14 @@ public class DeathListener implements Listener {
         victimProfile.killstreak.set(0);
 
         victim.sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + ((killerProfile.getSelectedKit() != null ) ? " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!" : "&c!")));
-        killer.sendMessage(ColorUtil.translateColors("&7You got &f10&7 coins for killing " + victim.getDisplayName() + "&7!"));
+        killer.sendMessage(ColorUtil.translateColors("&7You got &2$&a10 for killing " + victim.getDisplayName() + "&7!"));
 
         GameProfile profile = BasaltAPI.INSTANCE.quickFindProfile(killer.getUniqueId()).get();
-        Integer extraCredits = getExtraCredits(profile);
+        Integer extraMoney = getExtraMoney(profile);
 
-        if(extraCredits > 0) {
-            killerProfile.money.add(extraCredits);
-            killer.sendMessage(ColorUtil.translateColors("&7And another &f" + extraCredits + " &7credits for being a " + profile.getCurrentRank().getColor() + profile.getCurrentRank().getDisplayName() + "&7!"));
+        if(extraMoney > 0) {
+            killerProfile.money.add(extraMoney);
+            killer.sendMessage(ColorUtil.translateColors("&7And another &2$&a" + extraMoney + " &7for being a " + profile.getCurrentRank().getColor() + profile.getCurrentRank().getDisplayName() + "&7!"));
         }
 
         killerProfile.money.add(10);
@@ -157,10 +157,10 @@ public class DeathListener implements Listener {
         victim.sendMessage(ColorUtil.translateColors("&cYou died."));
     }
 
-    public Integer getExtraCredits(GameProfile profile) {
+    public Integer getExtraMoney(GameProfile profile) {
 
-        if(Brawl.getInstance().getConfig().isSet("credits." + profile.getCurrentRank().getId().toLowerCase())) {
-            return Brawl.getInstance().getConfig().getInt("credits." + profile.getCurrentRank().getId().toLowerCase());
+        if(Brawl.getInstance().getConfig().isSet("extra-money." + profile.getCurrentRank().getId().toLowerCase())) {
+            return Brawl.getInstance().getConfig().getInt("extra-money." + profile.getCurrentRank().getId().toLowerCase());
         }
 
         return 0;
