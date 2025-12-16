@@ -83,18 +83,18 @@ public class Melon extends Kit {
         return List.of(
                 new ItemBuilder(Material.LEATHER_HELMET)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 10)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .setHexColor("#7FCC19")
                         .build(),
                 new ItemStack(Material.IRON_CHESTPLATE),
                 new ItemBuilder(Material.LEATHER_LEGGINGS)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 10)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .setHexColor("#7FCC19")
                         .build(),
                 new ItemBuilder(Material.LEATHER_BOOTS)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 10)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .setHexColor("#7FCC19")
                         .build()
         );
@@ -127,7 +127,7 @@ public class Melon extends Kit {
 
             cd.applyCooldown(player, 10, TimeUnit.SECONDS, Brawl.getInstance());
 
-            new BlockProjectile(Brawl.getInstance(), Material.MELON, 2).withMetadata(MELON_METADATA).shoot(player);
+            new BlockProjectile(Brawl.getInstance(), Material.MELON, 4).withMetadata(MELON_METADATA).shoot(player);
         }
     }
 

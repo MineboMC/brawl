@@ -8,3 +8,6 @@ mongo:
 
 manage:
   freekitsmode: false
+
+credits:
+  owner: 50

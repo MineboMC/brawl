@@ -109,7 +109,7 @@ public class Avatar extends Kit {
             }
             cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
             player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GHAST_SHOOT, 1, 1);
-            new BlockProjectile(Brawl.getInstance(), Material.ICE, 2)
+            new BlockProjectile(Brawl.getInstance(), Material.ICE, 4)
                     .withMetadata("WATER_GUN")
                     .shoot(player);
         }

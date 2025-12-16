@@ -46,7 +46,7 @@ public class AttackDogs extends KillStreak {
 
     @Override
     public String getDescription() {
-        return "Spawns attack dogs around you.";
+        return "Gives you attack dogs for 30 seconds.";
     }
 
     @Override
