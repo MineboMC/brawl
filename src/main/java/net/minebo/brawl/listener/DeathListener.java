@@ -119,7 +119,7 @@ public class DeathListener implements Listener {
         victimProfile.killstreak.set(0);
 
         victim.sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + ((killerProfile.getSelectedKit() != null ) ? " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!" : "&c!")));
-        killer.sendMessage(ColorUtil.translateColors("&7You got &2$&a10 for killing " + victim.getDisplayName() + "&7!"));
+        killer.sendMessage(ColorUtil.translateColors("&7You got &2$&a10 &7for killing " + victim.getDisplayName() + "&7!"));
 
         GameProfile profile = BasaltAPI.INSTANCE.quickFindProfile(killer.getUniqueId()).get();
         Integer extraMoney = getExtraMoney(profile);
