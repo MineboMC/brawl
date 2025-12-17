@@ -7,6 +7,7 @@ import net.minebo.brawl.Brawl;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
+import net.minebo.brawl.kit.impl.Phantom;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
 import net.minebo.cobalt.util.ColorUtil;
@@ -30,6 +31,10 @@ public class GeneralCommands extends BaseCommand {
 
         if (player.hasPermission("basic.staff")) {
             player.sendMessage(ChatColor.YELLOW + "You bypassed the spawn timer since you are a staff member.");
+
+            if (profile.getSelectedKit() instanceof Phantom) {
+                Phantom.FlightTimer.flightTasks.remove(player.getUniqueId());
+            }
 
             Kit.clear(player);
             player.teleport(Bukkit.getWorlds().getFirst().getSpawnLocation());

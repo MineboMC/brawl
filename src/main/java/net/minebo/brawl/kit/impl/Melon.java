@@ -81,22 +81,14 @@ public class Melon extends Kit {
     @Override
     public List<ItemStack> getArmor() {
         return List.of(
-                new ItemBuilder(Material.LEATHER_HELMET)
+                new ItemStack(Material.IRON_HELMET),
+                new ItemBuilder(Material.LEATHER_CHESTPLATE)
                         .addEnchantment(Enchantment.PROTECTION, 1)
                         .addEnchantment(Enchantment.UNBREAKING, 30)
                         .setHexColor("#7FCC19")
                         .build(),
-                new ItemStack(Material.IRON_CHESTPLATE),
-                new ItemBuilder(Material.LEATHER_LEGGINGS)
-                        .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 30)
-                        .setHexColor("#7FCC19")
-                        .build(),
-                new ItemBuilder(Material.LEATHER_BOOTS)
-                        .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 30)
-                        .setHexColor("#7FCC19")
-                        .build()
+                new ItemStack(Material.IRON_LEGGINGS),
+                new ItemStack(Material.IRON_BOOTS)
         );
     }
 
@@ -139,7 +131,7 @@ public class Melon extends Kit {
 
         Player victim;
 
-        Player nearestPlayer = LocationUtil.getNearestPlayer(event.getHitLocation(), 3);
+        Player nearestPlayer = LocationUtil.getNearestPlayer(event.getHitLocation(), 7);
 
         if (victimEntity != null) {
             victim = (Player) victimEntity;

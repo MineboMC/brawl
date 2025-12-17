@@ -5,6 +5,7 @@ import net.minebo.brawl.Brawl;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.cooldown.construct.Cooldown;
+import net.minebo.cobalt.timer.Timer;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ItemBuilder;
 import org.bukkit.DyeColor;
@@ -13,13 +14,18 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class Phantom extends Kit {
@@ -104,24 +110,46 @@ public class Phantom extends Kit {
 
             cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
 
+            new FlightTimer(player, Brawl.getInstance()).start();
+
+        }
+    }
+
+    @EventHandler
+    public void onTakeDamage(EntityDamageByEntityEvent event) {
+        if(!(event.getDamager() instanceof Player)) return;
+        if(!(event.getEntity() instanceof Player)) return;
+
+        Player player = (Player) event.getEntity();
+
+        player.setAllowFlight(false);
+        player.setFlying(false);
+
+        player.sendMessage(ColorUtil.translateColors("&7Your flight has been disabled due to being hit."));
+
+        FlightTimer.flightTasks.remove(player.getUniqueId());
+    }
+
+    public class FlightTimer extends Timer {
+        public static final Map<UUID, Task> flightTasks = new HashMap<>();
+
+        public FlightTimer(Player player, Plugin plugin) {
+            super(player, 5, flightTasks, plugin);
+        }
+
+        @Override
+        protected void onStart() {
             player.setAllowFlight(true);
             player.setFlying(true);
 
             player.sendMessage(ColorUtil.translateColors("&eYou can now fly for 5 seconds!"));
+        }
 
-            new BukkitRunnable() {
-
-                @Override
-                public void run() {
-
-                player.sendMessage(ColorUtil.translateColors("&cYou can no longer fly."));
-                player.setFlying(false);
-                player.setAllowFlight(false);
-
-                }
-
-            }.runTaskLater(Brawl.getInstance(), 100);
-
+        @Override
+        protected void onComplete() {
+            player.sendMessage(ColorUtil.translateColors("&cYou can no longer fly."));
+            player.setFlying(false);
+            player.setAllowFlight(false);
         }
     }
 

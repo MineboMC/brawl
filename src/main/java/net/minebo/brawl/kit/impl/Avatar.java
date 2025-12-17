@@ -16,6 +16,7 @@ import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -142,21 +143,40 @@ public class Avatar extends Kit {
 
     private void createTemporaryWater(Location loc) {
         List<Location> waterBlocks = new ArrayList<>();
+        List<Location> lavaBlocksToRestore = new ArrayList<>();
+        List<Material> originalMaterials = new ArrayList<>();
+
         World world = loc.getWorld();
         for (int x = -1; x <= 1; x++)
             for (int z = -1; z <= 1; z++) {
                 Location waterLoc = loc.clone().add(x, 0, z);
+                Material originalType = waterLoc.getBlock().getType();
+
                 if (waterLoc.getBlock().getType() == Material.AIR) {
-                    waterLoc.getBlock().setType(Material.WATER);
+                    waterLoc. getBlock().setType(Material.WATER);
                     org.bukkit.block.data.BlockData data = waterLoc.getBlock().getBlockData();
-                    if (data instanceof org.bukkit.block.data.Levelled levelled) {
+                    if (data instanceof org.bukkit.block.data. Levelled levelled) {
                         levelled.setLevel(0); // source
                         waterLoc.getBlock().setBlockData(levelled, false);
                     }
                     waterLoc.getBlock().setMetadata("avatar_water", new FixedMetadataValue(Brawl.getInstance(), true));
                     waterBlocks.add(waterLoc);
                 }
+
+                // Store lava blocks that might turn into obsidian
+                for (int lx = -1; lx <= 1; lx++) {
+                    for (int ly = -1; ly <= 1; ly++) {
+                        for (int lz = -1; lz <= 1; lz++) {
+                            Location lavaCheck = waterLoc.clone().add(lx, ly, lz);
+                            if (lavaCheck.getBlock().getType() == Material.LAVA) {
+                                lavaBlocksToRestore.add(lavaCheck. clone());
+                                originalMaterials.add(Material.LAVA);
+                            }
+                        }
+                    }
+                }
             }
+
         Bukkit.getScheduler().runTaskLater(Brawl.getInstance(), () -> {
             for (Location l : waterBlocks) {
                 if (l.getBlock().getType() == Material.WATER) {
@@ -164,7 +184,34 @@ public class Avatar extends Kit {
                     l.getBlock().setType(Material.AIR);
                 }
             }
+
+            // Restore any lava that was converted
+            for (int i = 0; i < lavaBlocksToRestore.size(); i++) {
+                Location lavaLoc = lavaBlocksToRestore.get(i);
+                if (lavaLoc.getBlock().getType() == Material.OBSIDIAN ||
+                        lavaLoc. getBlock().getType() == Material.COBBLESTONE ||
+                        lavaLoc.getBlock().getType() == Material.STONE) {
+                    lavaLoc.getBlock().setType(originalMaterials.get(i));
+                }
+            }
         }, 40L);
+    }
+
+    @EventHandler
+    public void onBlockForm(BlockFormEvent event) {
+        // Check if the block forming is next to avatar water
+        Location formLoc = event.getBlock().getLocation();
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                for (int z = -1; z <= 1; z++) {
+                    Location checkLoc = formLoc.clone().add(x, y, z);
+                    if (checkLoc.getBlock().hasMetadata("avatar_water")) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     // Add these event handlers to your Kit class

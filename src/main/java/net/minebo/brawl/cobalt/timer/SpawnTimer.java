@@ -1,6 +1,7 @@
 package net.minebo.brawl.cobalt.timer;
 
 import net.minebo.brawl.kit.Kit;
+import net.minebo.brawl.kit.impl.Phantom;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
 import net.minebo.cobalt.timer.Timer;
@@ -40,6 +41,10 @@ public class SpawnTimer extends Timer {
     @Override
     protected void onComplete() {
         BrawlProfile profile = BrawlProfile.get(player);
+
+        if (profile.getSelectedKit() instanceof Phantom) {
+            Phantom.FlightTimer.flightTasks.remove(player.getUniqueId());
+        }
 
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
         player.sendMessage(ColorUtil.translateColors("&eYou have been teleported to spawn!"));
