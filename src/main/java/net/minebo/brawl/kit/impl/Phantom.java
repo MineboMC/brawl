@@ -121,13 +121,16 @@ public class Phantom extends Kit {
         if(!(event.getEntity() instanceof Player)) return;
 
         Player player = (Player) event.getEntity();
+        BrawlProfile profile = BrawlProfile.get(player);
 
-        player.setAllowFlight(false);
-        player.setFlying(false);
+        if (FlightTimer.flightTasks.containsKey(player.getUniqueId())) {
+            player.setAllowFlight(false);
+            player.setFlying(false);
 
-        player.sendMessage(ColorUtil.translateColors("&7Your flight has been disabled due to being hit."));
+            player.sendMessage(ColorUtil.translateColors("&7Your flight has been disabled due to being hit."));
 
-        FlightTimer.flightTasks.remove(player.getUniqueId());
+            FlightTimer.flightTasks.remove(player.getUniqueId());
+        }
     }
 
     public class FlightTimer extends Timer {
