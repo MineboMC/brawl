@@ -33,7 +33,7 @@ public class GeneralCommands extends BaseCommand {
             player.sendMessage(ChatColor.YELLOW + "You bypassed the spawn timer since you are a staff member.");
 
             if (profile.getSelectedKit() instanceof Phantom) {
-                Phantom.FlightTimer.flightTasks.remove(player.getUniqueId());
+                Phantom.flightTimer.cancel(player);
             }
 
             Kit.clear(player);
@@ -57,12 +57,12 @@ public class GeneralCommands extends BaseCommand {
             return;
         }
 
-        if (SpawnTimer.spawnTasks.containsValue(player.getUniqueId())) {
+        if (Brawl.getInstance().getSpawnTimer().hasTimer(player.getUniqueId())) {
             player.sendMessage(ChatColor.RED + "You are already teleporting to spawn.");
             return; // dont potato and let them spam spawn
         }
 
-        new SpawnTimer(player, Brawl.getInstance()).start();
+        Brawl.getInstance().getSpawnTimer().start(player);
     }
 
     @CommandAlias("stats|statistics")

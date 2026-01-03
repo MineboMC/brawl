@@ -7,33 +7,26 @@ import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class NukeTimer extends Timer {
-    public static final Map<UUID, Task> nukeTasks = new HashMap<>();
 
     private static final double NUKE_RADIUS = 25.0D;
     private static final double NUKE_DAMAGE = 100.0D;
 
-    public NukeTimer(Player player, Plugin plugin) {
-        super(player, 10, nukeTasks, plugin);
+    public NukeTimer(Plugin plugin) {
+        super(10, plugin);
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart(Player player) {
         // message to the nuke owner that their nuke countdown has started
         Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors("&c&lTactical Nuke Incoming...")));
     }
 
     @Override
-    protected boolean onTick(int secondsLeft) {
+    protected boolean onTick(Player player, int secondsLeft) {
         // Broadcast countdown message to all online players and play effects/sounds
         String countdownMessage = ColorUtil.translateColors("&c" + secondsLeft + "...");
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -53,7 +46,7 @@ public class NukeTimer extends Timer {
     }
 
     @Override
-    protected void onComplete() {
+    protected void onComplete(Player player) {
         // Detonate the nuke: damage players within radius excluding the nuke owner and spawn-protected players
         int nukedCount = 0;
 

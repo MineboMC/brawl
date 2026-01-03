@@ -30,6 +30,8 @@ import java.util.concurrent.TimeUnit;
 
 public class Phantom extends Kit {
 
+    public static FlightTimer flightTimer = new FlightTimer(Brawl.getInstance());
+
     @Override
     public ItemStack getIcon() {
         return new ItemStack(Material.PHANTOM_MEMBRANE);
@@ -110,7 +112,7 @@ public class Phantom extends Kit {
 
             cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
 
-            new FlightTimer(player, Brawl.getInstance()).start();
+            flightTimer.start(player);
 
         }
     }
@@ -123,25 +125,24 @@ public class Phantom extends Kit {
         Player player = (Player) event.getEntity();
         BrawlProfile profile = BrawlProfile.get(player);
 
-        if (FlightTimer.flightTasks.containsKey(player.getUniqueId())) {
+        if (flightTimer.hasTimer(player.getUniqueId())) {
             player.setAllowFlight(false);
             player.setFlying(false);
 
             player.sendMessage(ColorUtil.translateColors("&7Your flight has been disabled due to being hit."));
 
-            FlightTimer.flightTasks.remove(player.getUniqueId());
+            flightTimer.cancel(player);
         }
     }
 
-    public class FlightTimer extends Timer {
-        public static final Map<UUID, Task> flightTasks = new HashMap<>();
+    public static class FlightTimer extends Timer {
 
-        public FlightTimer(Player player, Plugin plugin) {
-            super(player, 5, flightTasks, plugin);
+        public FlightTimer(Plugin plugin) {
+            super(5, plugin);
         }
 
         @Override
-        protected void onStart() {
+        protected void onStart(Player player) {
             player.setAllowFlight(true);
             player.setFlying(true);
 
@@ -149,11 +150,12 @@ public class Phantom extends Kit {
         }
 
         @Override
-        protected void onComplete() {
+        protected void onComplete(Player player) {
             player.sendMessage(ColorUtil.translateColors("&cYou can no longer fly."));
             player.setFlying(false);
             player.setAllowFlight(false);
         }
+
     }
 
 }

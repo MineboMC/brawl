@@ -79,11 +79,9 @@ public class ScoreboardImpl extends ScoreboardProvider {
             }
         }
 
-        if(SpawnTimer.spawnTasks.containsKey(player.getUniqueId())) {
-            Timer.Task task = SpawnTimer.spawnTasks.get(player.getUniqueId());
-
-            if(TimeUtil.longToTime(task.getTime()) != "0") {
-                lines.add(ColorUtil.translateColors("&3Spawn: &f" + TimeUtil.longToTime(task.getTime())));
+        if(Brawl.getInstance().getSpawnTimer().hasTimer(player.getUniqueId())) {
+            if(Brawl.getInstance().getSpawnTimer().getRemaining(player) != "0") {
+                lines.add(ColorUtil.translateColors("&3Spawn: &f" + Brawl.getInstance().getSpawnTimer().getRemaining(player)));
             }
         }
 

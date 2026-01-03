@@ -13,24 +13,19 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 public class SpawnTimer extends Timer {
-    public static final Map<UUID, Task> spawnTasks = new HashMap<>();
 
-    public SpawnTimer(Player player, Plugin plugin) {
-        super(player, 10, spawnTasks, plugin);
+    public SpawnTimer(Plugin plugin) {
+        super(10, plugin);
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart(Player player) {
         player.sendMessage(ColorUtil.translateColors("&eTeleporting you to spawn in 10 seconds."));
     }
 
     @Override
-    protected boolean onTick(int secondsLeft) {
+    protected boolean onTick(Player player, int secondsLeft) {
         if (player.hasMetadata("frozen")) {
             player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you are frozen."));
             return false;
@@ -39,11 +34,11 @@ public class SpawnTimer extends Timer {
     }
 
     @Override
-    protected void onComplete() {
+    protected void onComplete(Player player) {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if (profile.getSelectedKit() instanceof Phantom) {
-            Phantom.FlightTimer.flightTasks.remove(player.getUniqueId());
+            Phantom.flightTimer.cancel(player);
         }
 
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
@@ -66,25 +61,25 @@ public class SpawnTimer extends Timer {
             return;
         }
 
-        if(spawnTasks.containsKey(player.getUniqueId())) {
+        if(hasTimer(player.getUniqueId())) {
             player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you moved."));
-            spawnTasks.remove(player.getUniqueId());
+            taskMap.remove(player.getUniqueId());
         }
     }
 
     @EventHandler
     public void onTakeDamage(EntityDamageByEntityEvent event) {
-        if(spawnTasks.containsKey(event.getEntity().getUniqueId())) {
-            player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you were hit."));
-            spawnTasks.remove(event.getEntity().getUniqueId());
+        if(hasTimer(event.getEntity().getUniqueId())) {
+            event.getEntity().sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you were hit."));
+            taskMap.remove(event.getEntity().getUniqueId());
         }
     }
 
     @EventHandler
     public void onDoDamage(EntityDamageByEntityEvent event) {
-        if(spawnTasks.containsKey(event.getDamager().getUniqueId())) {
-            player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you hit a player."));
-            spawnTasks.remove(event.getDamager().getUniqueId());
+        if(hasTimer(event.getDamager().getUniqueId())) {
+            event.getDamager().sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you hit a player."));
+            taskMap.remove(event.getDamager().getUniqueId());
         }
     }
 

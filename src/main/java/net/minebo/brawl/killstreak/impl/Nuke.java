@@ -40,7 +40,7 @@ public class Nuke extends KillStreak {
 
     @Override
     public void doReward(Player player) {
-        new NukeTimer(player, Brawl.getInstance()).start();
+        Brawl.getInstance().getNukeTimer().start(player);
     }
 
 }

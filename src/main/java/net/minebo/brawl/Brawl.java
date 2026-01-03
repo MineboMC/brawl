@@ -6,6 +6,8 @@ import net.minebo.brawl.cobalt.ScoreboardImpl;
 import net.minebo.brawl.cobalt.completion.KitCompletionHandler;
 import net.minebo.brawl.cobalt.context.KitContextResolver;
 import net.minebo.brawl.cobalt.cooldown.CombatTagCooldown;
+import net.minebo.brawl.cobalt.timer.NukeTimer;
+import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.listener.*;
@@ -36,6 +38,9 @@ public class Brawl extends JavaPlugin {
     @Getter @Setter public MongoHandler mongoHandler;
     @Getter @Setter public CooldownHandler cooldownHandler;
 
+    @Getter @Setter public SpawnTimer spawnTimer;
+    @Getter @Setter public NukeTimer nukeTimer;
+
     @Getter public TipTask tipTask;
 
     @Override
@@ -60,6 +65,9 @@ public class Brawl extends JavaPlugin {
 
         getCooldownHandler().registerCooldown("Combat Tag", new CombatTagCooldown());
         getCooldownHandler().registerCooldown("Free Soup", new Cooldown());
+
+        setSpawnTimer(new SpawnTimer(this));
+        setNukeTimer(new NukeTimer(this));
 
         Kit.init();
         KillStreak.init();
