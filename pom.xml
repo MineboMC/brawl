@@ -113,5 +113,11 @@
             <version>1.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>net.minebo</groupId>
+            <artifactId>koth</artifactId>
+            <version>1.0-DEV</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

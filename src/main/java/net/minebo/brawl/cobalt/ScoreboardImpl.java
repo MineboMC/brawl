@@ -10,6 +10,8 @@ import net.minebo.cobalt.timer.Timer;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ServerUtil;
 import net.minebo.cobalt.util.TimeUtil;
+import net.minebo.koth.koth.Koth;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -36,6 +38,10 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(player.hasMetadata("modmode")){
             lines.addAll(generateStaffLines(player));
+        }
+
+        if(Bukkit.getPluginManager().isPluginEnabled("KoTH")) {
+            if(Koth.currentKoth != null) lines.addAll(generateKothLines());
         }
 
         lines.add(cfg.getString("scoreboard.url"));
@@ -135,6 +141,18 @@ public class ScoreboardImpl extends ScoreboardProvider {
             }
         }
 
+        lines.add("");
+
+        return lines;
+    }
+
+    public List<String> generateKothLines() {
+        List<String> lines = new ArrayList<>();
+        Koth koth = Koth.currentKoth;
+
+        lines.add("&9&l" + koth.getName() + " KoTH");
+        lines.add("&fTime: &e" + koth.getRemaining());
+        lines.add("&fCoords: &e/koth");
         lines.add("");
 
         return lines;

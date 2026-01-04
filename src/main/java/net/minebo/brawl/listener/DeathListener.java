@@ -129,6 +129,8 @@ public class DeathListener implements Listener {
             killer.sendMessage(ColorUtil.translateColors("&7And another &2$&a" + extraMoney + " &7for being a " + profile.getCurrentRank().getColor() + profile.getCurrentRank().getDisplayName() + "&7!"));
         }
 
+        killer.sendActionBar(ColorUtil.translateColors("&a+ &4$&a" + (10+extraMoney) + " (killed " + victim.getName()) + ")");
+
         killerProfile.money.add(10);
 
         killerProfile.save();
