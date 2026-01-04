@@ -16,7 +16,7 @@ public class KothListener implements Listener {
         Player player = event.getWinner();
         BrawlProfile profile = BrawlProfile.get(player);
 
-        player.sendActionBar(ColorUtil.translateColors("&a+ &4$&a50 (capped koth)"));
+        player.sendActionBar(ColorUtil.translateColors("&a+ &2$&a50 (capped koth)"));
         profile.money.add(50);
     }
 }
