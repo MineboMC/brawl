@@ -5,6 +5,8 @@ import net.minebo.brawl.Brawl;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.cooldown.construct.Cooldown;
+import net.minebo.cobalt.scoreboard.animation.AnimationType;
+import net.minebo.cobalt.scoreboard.animation.TextAnimation;
 import net.minebo.cobalt.scoreboard.provider.ScoreboardProvider;
 import net.minebo.cobalt.timer.Timer;
 import net.minebo.cobalt.util.ColorUtil;
@@ -22,9 +24,11 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
     FileConfiguration cfg = Brawl.getInstance().getConfig();
 
+    TextAnimation animation = new TextAnimation(Brawl.getInstance(), cfg.getString("scoreboard.title"), ChatColor.GOLD, ChatColor.YELLOW, AnimationType.DEFAULT, true);
+
     @Override
     public String getModernTitle(Player player){
-        return cfg.getString("scoreboard.title");
+        return animation.getCurrentFrame();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.minebo.brawl.killstreak.buttons;
+package net.minebo.brawl.killstreak.button;
 
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.mongo.model.BrawlProfile;
@@ -39,8 +39,9 @@ public class KillStreakButton extends Button {
         } else {
             int kills = killStreak.getKills();
             int progress = (kills == 0) ? 0 : (int) Math.round(((double) profile.killstreak.get() / (double) kills) * 100.0);
-            description.add(ColorUtil.translateColors("&6Your Progress: &7(&e" + progress + "%&7)"));
+            description.add(ColorUtil.translateColors("&6Your Progress: &f" + progress + "%"));
         }
+        description.add(ColorUtil.translateColors("&6Kills: &f" + killStreak.getKills()));
 
         return description;
     }

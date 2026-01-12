@@ -153,9 +153,9 @@ public class Avatar extends Kit {
                 Material originalType = waterLoc.getBlock().getType();
 
                 if (waterLoc.getBlock().getType() == Material.AIR) {
-                    waterLoc. getBlock().setType(Material.WATER);
+                    waterLoc.getBlock().setType(Material.WATER);
                     org.bukkit.block.data.BlockData data = waterLoc.getBlock().getBlockData();
-                    if (data instanceof org.bukkit.block.data. Levelled levelled) {
+                    if (data instanceof org.bukkit.block.data.Levelled levelled) {
                         levelled.setLevel(0); // source
                         waterLoc.getBlock().setBlockData(levelled, false);
                     }
@@ -169,7 +169,7 @@ public class Avatar extends Kit {
                         for (int lz = -1; lz <= 1; lz++) {
                             Location lavaCheck = waterLoc.clone().add(lx, ly, lz);
                             if (lavaCheck.getBlock().getType() == Material.LAVA) {
-                                lavaBlocksToRestore.add(lavaCheck. clone());
+                                lavaBlocksToRestore.add(lavaCheck.clone());
                                 originalMaterials.add(Material.LAVA);
                             }
                         }
@@ -189,7 +189,7 @@ public class Avatar extends Kit {
             for (int i = 0; i < lavaBlocksToRestore.size(); i++) {
                 Location lavaLoc = lavaBlocksToRestore.get(i);
                 if (lavaLoc.getBlock().getType() == Material.OBSIDIAN ||
-                        lavaLoc. getBlock().getType() == Material.COBBLESTONE ||
+                        lavaLoc.getBlock().getType() == Material.COBBLESTONE ||
                         lavaLoc.getBlock().getType() == Material.STONE) {
                     lavaLoc.getBlock().setType(originalMaterials.get(i));
                 }

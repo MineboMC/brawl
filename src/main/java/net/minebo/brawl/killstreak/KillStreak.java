@@ -1,7 +1,7 @@
 package net.minebo.brawl.killstreak;
 
 import net.md_5.bungee.api.ChatColor;
-import net.minebo.brawl.killstreak.buttons.KillStreakButton;
+import net.minebo.brawl.killstreak.button.KillStreakButton;
 import net.minebo.brawl.killstreak.impl.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.cobalt.menu.construct.Menu;
@@ -42,7 +42,7 @@ public abstract class KillStreak {
     }
 
     public static void openMenu(Player player) {
-        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&e&lKill Streaks"));
+        Menu menu = new Menu().setTitle(ColorUtil.translateColors("Killstreaks"));
 
         BrawlProfile profile = BrawlProfile.get(player);
 

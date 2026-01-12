@@ -4,14 +4,18 @@ import lombok.Getter;
 import lombok.Setter;
 import net.minebo.brawl.cobalt.ScoreboardImpl;
 import net.minebo.brawl.cobalt.completion.KitCompletionHandler;
+import net.minebo.brawl.cobalt.completion.ShopItemCompletionHandler;
 import net.minebo.brawl.cobalt.context.KitContextResolver;
+import net.minebo.brawl.cobalt.context.ShopItemContextResolver;
 import net.minebo.brawl.cobalt.cooldown.CombatTagCooldown;
 import net.minebo.brawl.cobalt.timer.NukeTimer;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
+import net.minebo.brawl.hook.PluginHook;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.listener.*;
 import net.minebo.brawl.mongo.model.BrawlProfile;
+import net.minebo.brawl.shop.ShopItem;
 import net.minebo.brawl.spawn.listener.SpawnItemListener;
 import net.minebo.brawl.task.TipTask;
 import net.minebo.cobalt.acf.ACFCommandController;
@@ -20,6 +24,7 @@ import net.minebo.cobalt.cooldown.CooldownHandler;
 import net.minebo.brawl.mongo.MongoHandler;
 import net.minebo.cobalt.cooldown.construct.Cooldown;
 import net.minebo.cobalt.menu.MenuHandler;
+import net.minebo.cobalt.scheduler.Scheduler;
 import net.minebo.cobalt.scoreboard.ScoreboardHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
@@ -54,7 +59,9 @@ public class Brawl extends JavaPlugin {
         acf = new ACFManager(this);
 
         ACFCommandController.registerCompletion("kits", new KitCompletionHandler());
+        ACFCommandController.registerCompletion("shopitems", new ShopItemCompletionHandler());
         ACFCommandController.registerContext(Kit.class, new KitContextResolver());
+        ACFCommandController.registerContext(ShopItem.class, new ShopItemContextResolver());
 
         ACFCommandController.registerAll(this);
 
@@ -71,6 +78,13 @@ public class Brawl extends JavaPlugin {
 
         Kit.init();
         KillStreak.init();
+        ShopItem.init();
+
+        // fancyholograms is a paper plugin so we gotta delay or it wont pick it up
+        new Scheduler(this).delay(60L).sync(() -> {
+            getLogger().info("Initializing plugin hooks...");
+            PluginHook.init();
+        }).run();
 
         registerListeners();
         setupEnvironment();

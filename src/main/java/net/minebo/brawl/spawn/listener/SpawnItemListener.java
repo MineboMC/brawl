@@ -1,19 +1,14 @@
 package net.minebo.brawl.spawn.listener;
 
-import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import net.minebo.brawl.kit.Kit;
-import net.minebo.brawl.kit.menu.KitButton;
+import net.minebo.brawl.kit.button.KitButton;
 import net.minebo.brawl.mongo.model.BrawlProfile;
 import net.minebo.brawl.spawn.SpawnHotbar;
-import net.minebo.cobalt.menu.MenuHandler;
-import net.minebo.cobalt.menu.construct.AbstractButton;
-import net.minebo.cobalt.menu.construct.Button;
 import net.minebo.cobalt.menu.construct.Menu;
 import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ItemListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,7 +30,7 @@ public class SpawnItemListener extends ItemListener {
     }
 
     public static void openKitMenu(Player player) {
-        Menu menu = new Menu().setTitle(ColorUtil.translateColors("&e&lKits")).setUpdateAfterClick(true);
+        Menu menu = new Menu().setTitle(ColorUtil.translateColors("Kits")).setUpdateAfterClick(true);
 
         BrawlProfile profile = BrawlProfile.get(player);
 
