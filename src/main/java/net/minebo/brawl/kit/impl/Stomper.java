@@ -70,16 +70,20 @@ public class Stomper extends Kit implements Listener {
         return List.of(
                 new ItemBuilder(Material.LEATHER_HELMET)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 20)
+                        .addEnchantment(Enchantment.UNBREAKING, 50)
                         .setHexColor("#FF0000")
                         .build(),
                 new ItemBuilder(Material.GOLDEN_CHESTPLATE)
                         .addEnchantment(Enchantment.PROTECTION, 2)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build(),
                 new ItemBuilder(Material.GOLDEN_LEGGINGS)
                         .addEnchantment(Enchantment.PROTECTION, 2)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build(),
-                new ItemStack(Material.IRON_BOOTS)
+                new ItemBuilder(Material.IRON_BOOTS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build()
         );
     }
     @Override

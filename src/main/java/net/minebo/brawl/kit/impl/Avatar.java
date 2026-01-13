@@ -10,6 +10,7 @@ import net.minebo.cobalt.util.ColorUtil;
 import net.minebo.cobalt.util.ItemBuilder;
 import net.minebo.cobalt.util.LocationUtil;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Item;
@@ -72,10 +73,18 @@ public class Avatar extends Kit {
     @Override
     public List<ItemStack> getArmor() {
         return List.of(
-                new ItemStack(Material.CHAINMAIL_HELMET),
-                new ItemStack(Material.IRON_CHESTPLATE),
-                new ItemStack(Material.CHAINMAIL_LEGGINGS),
-                new ItemStack(Material.IRON_BOOTS)
+                new ItemBuilder(Material.CHAINMAIL_HELMET)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_CHESTPLATE)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.CHAINMAIL_LEGGINGS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_BOOTS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build()
         );
     }
 

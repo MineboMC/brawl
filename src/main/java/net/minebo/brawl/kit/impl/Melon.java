@@ -71,7 +71,7 @@ public class Melon extends Kit {
         return List.of(
                 new ItemBuilder(Material.MELON_SLICE)
                         .setName(ChatColor.YELLOW + "Melon Smacker")
-                        .addEnchantment(Enchantment.SHARPNESS, 24) // cuz kitara reverts sharpness to 1.8
+                        .addEnchantment(Enchantment.SHARPNESS, 16)
                         .setUnbreakable(true)
                         .build(),
                 getAbilityItem()
@@ -81,14 +81,20 @@ public class Melon extends Kit {
     @Override
     public List<ItemStack> getArmor() {
         return List.of(
-                new ItemStack(Material.IRON_HELMET),
+                new ItemBuilder(Material.IRON_HELMET)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
                 new ItemBuilder(Material.LEATHER_CHESTPLATE)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .addEnchantment(Enchantment.UNBREAKING, 50)
                         .setHexColor("#7FCC19")
                         .build(),
-                new ItemStack(Material.IRON_LEGGINGS),
-                new ItemStack(Material.IRON_BOOTS)
+                new ItemBuilder(Material.IRON_LEGGINGS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_BOOTS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build()
         );
     }
 

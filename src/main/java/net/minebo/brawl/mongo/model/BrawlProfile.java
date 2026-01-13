@@ -18,7 +18,7 @@ public class BrawlProfile {
 
     public static HashMap<UUID, BrawlProfile> profiles = new HashMap<>();
 
-    public UUID uniqueId;
+    public UUID uuid;
     @Setter public String lastUsername;
     @Setter public String lastKit;
 
@@ -35,7 +35,7 @@ public class BrawlProfile {
 
     // Load from Document (MongoDB, on server start)
     public BrawlProfile(Document doc) {
-        this.uniqueId = UUID.fromString(doc.getString("uniqueId"));
+        this.uuid = UUID.fromString(doc.getString("uuid"));
         this.lastUsername = doc.getString("lastUsername");
         this.lastKit = doc.getString("lastKit") != null ? doc.getString("lastKit") : "";
         this.money = new Statistic(doc.getInteger("money"));
@@ -45,12 +45,12 @@ public class BrawlProfile {
         this.highestkillstreak = new Statistic(doc.getInteger("highestkillstreak"));
         this.ownedKits = doc.getList("ownedKits", String.class) != null ? doc.getList("ownedKits", String.class) : new ArrayList<>();
         this.spawnProtected = true;
-        profiles.put(this.uniqueId, this);
+        profiles.put(this.uuid, this);
     }
 
     public Document toDocument() {
         Document document = new Document();
-        document.put("uniqueId", uniqueId.toString());
+        document.put("uuid", uuid.toString());
         document.put("lastUsername", lastUsername);
         document.put("lastKit", lastKit);
         document.put("money", money.value);
@@ -64,7 +64,7 @@ public class BrawlProfile {
 
     // Full constructor (for new profiles)
     public BrawlProfile(UUID uniqueId, String lastUsername) {
-        this.uniqueId = uniqueId;
+        this.uuid = uniqueId;
         this.lastUsername = lastUsername;
         this.lastKit = "";
         this.money = new Statistic(0);
@@ -74,12 +74,12 @@ public class BrawlProfile {
         this.highestkillstreak = new Statistic(0);
         this.ownedKits = new ArrayList<>();
         this.spawnProtected = true;
-        profiles.put(this.uniqueId, this);
+        profiles.put(this.uuid, this);
     }
 
     // If you ever want a full manual profile
     public BrawlProfile(UUID uniqueId, String lastUsername, String lastKit, Statistic money, Statistic kills, Statistic deaths, Statistic killstreak, Statistic highestkillstreak, List<String> ownedKits) {
-        this.uniqueId = uniqueId;
+        this.uuid = uniqueId;
         this.lastUsername = lastUsername;
         this.lastKit = lastKit != null ? lastKit : "";
         this.money = money != null ? money : new Statistic(0);
@@ -89,12 +89,12 @@ public class BrawlProfile {
         this.highestkillstreak = highestkillstreak != null ? highestkillstreak : new Statistic(0);
         this.ownedKits = ownedKits != null ? ownedKits : new ArrayList<>();
         this.spawnProtected = true;
-        profiles.put(this.uniqueId, this);
+        profiles.put(this.uuid, this);
     }
 
     public void save() {
         Brawl.getInstance().getMongoHandler().profileCollection.replaceOne(
-                Filters.eq("uniqueId", uniqueId.toString()),
+                Filters.eq("uuid", uuid.toString()),
                 toDocument(),
                 new UpdateOptions().upsert(true)
         );

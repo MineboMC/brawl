@@ -76,12 +76,18 @@ public class Phantom extends Kit {
         return List.of(
                 new ItemBuilder(Material.LEATHER_HELMET)
                         .addEnchantment(Enchantment.PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 20)
+                        .addEnchantment(Enchantment.UNBREAKING, 50)
                         .setHexColor("#6E516B")
                         .build(),
-                new ItemStack(Material.IRON_CHESTPLATE),
-                new ItemStack(Material.IRON_LEGGINGS),
-                new ItemStack(Material.IRON_BOOTS)
+                new ItemBuilder(Material.IRON_CHESTPLATE)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_LEGGINGS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_BOOTS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build()
         );
     }
 
@@ -129,8 +135,6 @@ public class Phantom extends Kit {
             player.setAllowFlight(false);
             player.setFlying(false);
 
-            player.sendMessage(ColorUtil.translateColors("&7Your flight has been disabled due to being hit."));
-
             flightTimer.cancel(player);
         }
     }
@@ -146,6 +150,7 @@ public class Phantom extends Kit {
             player.setAllowFlight(true);
             player.setFlying(true);
 
+            player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5, 1));
             player.sendMessage(ColorUtil.translateColors("&eYou can now fly for 5 seconds!"));
         }
 

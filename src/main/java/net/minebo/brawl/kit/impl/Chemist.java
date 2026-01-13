@@ -55,15 +55,19 @@ public class Chemist extends Kit {
         return List.of(
                 new ItemBuilder(Material.CHAINMAIL_HELMET)
                         .addEnchantment(Enchantment.PROTECTION, 1)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build(),
                 new ItemBuilder(Material.IRON_CHESTPLATE)
                         .addEnchantment(Enchantment.PROTECTION, 1)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build(),
                 new ItemBuilder(Material.CHAINMAIL_LEGGINGS)
                         .addEnchantment(Enchantment.PROTECTION, 1)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build(),
                 new ItemBuilder(Material.CHAINMAIL_BOOTS)
                         .addEnchantment(Enchantment.PROTECTION, 1)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
                         .build()
         );
     }

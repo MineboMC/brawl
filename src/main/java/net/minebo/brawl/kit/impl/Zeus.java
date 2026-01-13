@@ -68,13 +68,17 @@ public class Zeus extends Kit {
         return List.of(
                 new ItemBuilder(Material.LEATHER_HELMET)
                         .addEnchantment(Enchantment.FIRE_PROTECTION, 1)
-                        .addEnchantment(Enchantment.UNBREAKING, 20)
+                        .addEnchantment(Enchantment.UNBREAKING, 50)
                         .setHexColor("#FFD700")
                         .build(),
-                new ItemStack(Material.IRON_CHESTPLATE),
-                new ItemStack(Material.IRON_LEGGINGS),
+                new ItemBuilder(Material.IRON_CHESTPLATE)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
+                new ItemBuilder(Material.IRON_LEGGINGS)
+                        .addEnchantment(Enchantment.UNBREAKING, 30)
+                        .build(),
                 new ItemBuilder(Material.LEATHER_BOOTS)
-                        .addEnchantment(Enchantment.UNBREAKING, 20)
+                        .addEnchantment(Enchantment.UNBREAKING, 50)
                         .setHexColor("#FFD700")
                         .build()
         );
