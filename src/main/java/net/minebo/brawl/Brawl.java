@@ -117,10 +117,6 @@ public class Brawl extends JavaPlugin {
 
         // Spawn
         Bukkit.getPluginManager().registerEvents(new SpawnItemListener(), this);
-
-        if (Bukkit.getPluginManager().isPluginEnabled("KoTH")) {
-            Bukkit.getPluginManager().registerEvents(new KothListener(), this);
-        }
     }
 
     @Override
