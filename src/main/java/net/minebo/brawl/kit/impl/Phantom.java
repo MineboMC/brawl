@@ -39,11 +39,8 @@ public class Phantom extends Kit {
 
     @Override
     public String getName() {
-        return "Phantom";
+        return "<#6E516B>Phantom";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.of("#6E516B"); }
 
     @Override
     public String getDescription() {
@@ -56,7 +53,7 @@ public class Phantom extends Kit {
     @Override
     public ItemStack getAbilityItem() {
         return new ItemBuilder(Material.FEATHER)
-                .setName(getColor() + "Phantom Flight")
+                .setName("<#6E516B>Phantom Flight")
                 .build();
     }
 
@@ -106,13 +103,13 @@ public class Phantom extends Kit {
 
             BrawlProfile profile = BrawlProfile.get(player);
             if(profile.isSpawnProtected()) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
                 return;
             }
 
             Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Flight");
             if(cd.onCooldown(player)) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
                 return;
             }
 
@@ -151,12 +148,12 @@ public class Phantom extends Kit {
             player.setFlying(true);
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 5, 1));
-            player.sendMessage(ColorUtil.translateColors("&eYou can now fly for 5 seconds!"));
+            player.sendMessage(ColorUtil.translateColors("<yellow>You can now fly for 5 seconds!"));
         }
 
         @Override
         protected void onComplete(Player player) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can no longer fly."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can no longer fly."));
             player.setFlying(false);
             player.setAllowFlight(false);
         }

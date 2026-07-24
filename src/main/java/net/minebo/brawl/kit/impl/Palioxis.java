@@ -20,11 +20,8 @@ public class Palioxis extends Kit {
 
     @Override
     public String getName() {
-        return "Palioxis";
+        return "<#95F5E3>Palioxis";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.of("#95F5E3"); }
 
     @Override
     public String getDescription() {

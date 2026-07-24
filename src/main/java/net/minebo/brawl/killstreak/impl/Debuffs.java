@@ -15,12 +15,7 @@ public class Debuffs extends KillStreak {
 
     @Override
     public String getName() {
-        return "Debuffs";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.DARK_GREEN;
+        return "<dark_green>Debuffs";
     }
 
     @Override

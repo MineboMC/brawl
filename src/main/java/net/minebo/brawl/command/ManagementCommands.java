@@ -29,7 +29,7 @@ public class ManagementCommands extends BaseCommand {
         Kit.freeKitMode = !Kit.freeKitMode;
         Brawl.getInstance().getTipTask().generateTips();
         Bukkit.broadcastMessage("");
-        Bukkit.broadcastMessage(ColorUtil.translateColors("&eAll kits are " + (Kit.freeKitMode ? "now" : "no longer") + " free!"));
+        Bukkit.broadcastMessage(ColorUtil.translateColors("<yellow>All kits are " + (Kit.freeKitMode ? "now" : "no longer") + " free!"));
         Bukkit.broadcastMessage("");
         Brawl.getInstance().getConfig().set("manage.freekitsmode", Kit.freeKitMode);
         Brawl.getInstance().saveConfig();
@@ -40,7 +40,7 @@ public class ManagementCommands extends BaseCommand {
     @Description("Toggles kits being free.")
     @Syntax("<value>")
     public void testKillStreakCommand(Player sender, Integer ks) {
-        sender.sendMessage(ColorUtil.translateColors("&aIf there is a ks for &e" + ks + " &ait will be rewarded to " + sender.getDisplayName() + "&a!"));
+        sender.sendMessage(ColorUtil.translateColors("<green>If there is a ks for <yellow>" + ks + " <green>it will be rewarded to " + sender.getDisplayName() + "<green>!"));
         KillStreak.handleKillStreak(sender, ks);
     }
 
@@ -49,11 +49,11 @@ public class ManagementCommands extends BaseCommand {
     @Description("Toggles kits being free.")
     public void metricsCommand(CommandSender sender) { // more soon
         sender.sendMessage("");
-        sender.sendMessage(ColorUtil.translateColors("&4Brawl Metrics:"));
-        sender.sendMessage(ColorUtil.translateColors("&7Profiles: &f" + BrawlProfile.profiles.size()));
-        sender.sendMessage(ColorUtil.translateColors("&7Total Kills: &f" + BrawlProfile.getAllKills()));
-        sender.sendMessage(ColorUtil.translateColors("&7Total Deaths: &f" + BrawlProfile.getAllDeaths()));
-        sender.sendMessage(ColorUtil.translateColors("&7Total Money: &2$&a" + BrawlProfile.getAllMoney()));
+        sender.sendMessage(ColorUtil.translateColors("<dark_red>Brawl Metrics:"));
+        sender.sendMessage(ColorUtil.translateColors("<gray>Profiles: <white>" + BrawlProfile.profiles.size()));
+        sender.sendMessage(ColorUtil.translateColors("<gray>Total Kills: <white>" + BrawlProfile.getAllKills()));
+        sender.sendMessage(ColorUtil.translateColors("<gray>Total Deaths: <white>" + BrawlProfile.getAllDeaths()));
+        sender.sendMessage(ColorUtil.translateColors("<gray>Total Money: <dark_green>$<green>" + BrawlProfile.getAllMoney()));
         sender.sendMessage("");
     }
 

@@ -20,11 +20,8 @@ public class Chemist extends Kit {
 
     @Override
     public String getName() {
-        return "Chemist";
+        return "<dark_purple>Chemist";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.DARK_PURPLE; }
 
     @Override
     public String getDescription() {

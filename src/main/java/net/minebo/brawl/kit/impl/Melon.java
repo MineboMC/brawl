@@ -45,11 +45,8 @@ public class Melon extends Kit {
 
     @Override
     public String getName() {
-        return "Melon";
+        return "<#7FCC19>Melon";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.of("#7FCC19"); }
 
     @Override
     public String getDescription() {
@@ -62,7 +59,7 @@ public class Melon extends Kit {
     @Override
     public ItemStack getAbilityItem() {
         return new ItemBuilder(Material.GLISTERING_MELON_SLICE)
-                .setName(getColor() + "Melon Toss")
+                .setName("<#7FCC19>Melon Toss")
                 .build();
     }
 
@@ -113,13 +110,13 @@ public class Melon extends Kit {
 
             BrawlProfile profile = BrawlProfile.get(player);
             if(profile.isSpawnProtected()) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
                 return;
             }
 
             Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Melon Toss");
             if(cd.onCooldown(player)) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
                 return;
             }
 

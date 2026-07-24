@@ -21,11 +21,8 @@ public class PvP extends Kit {
 
     @Override
     public String getName() {
-        return "PvP";
+        return "<yellow>PvP";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.YELLOW; }
 
     @Override
     public String getDescription() {

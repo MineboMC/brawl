@@ -32,11 +32,8 @@ public class Zeus extends Kit {
 
     @Override
     public String getName() {
-        return "Zeus";
+        return "<#FFD700>Zeus";
     }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.of("#FFD700"); }
 
     @Override
     public String getDescription() {
@@ -49,7 +46,7 @@ public class Zeus extends Kit {
     @Override
     public ItemStack getAbilityItem() {
         return new ItemBuilder(Material.BLAZE_ROD)
-                .setName(getColor() + "Lightning Bolt")
+                .setName("<#FFD700>Lightning Bolt")
                 .build();
     }
 
@@ -99,13 +96,13 @@ public class Zeus extends Kit {
 
             BrawlProfile profile = BrawlProfile.get(player);
             if(profile.isSpawnProtected()) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
                 return;
             }
 
             Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Bolt");
             if(cd.onCooldown(player)) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
                 return;
             }
 

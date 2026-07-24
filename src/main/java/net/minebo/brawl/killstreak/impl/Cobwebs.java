@@ -13,12 +13,7 @@ public class Cobwebs extends KillStreak {
 
     @Override
     public String getName() {
-        return "Cobwebs";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.WHITE;
+        return "<white>Cobwebs";
     }
 
     @Override

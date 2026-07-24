@@ -22,7 +22,7 @@ public class KillStreakButton extends Button {
         this.profile = BrawlProfile.get(player);
         this.killStreak = killStreak;
 
-        setName(killStreak.getColor() + killStreak.getName());
+        setName(killStreak.getName());
         setAmount(killStreak.getKills());
 
         setLines(() -> getDescription());
@@ -31,17 +31,17 @@ public class KillStreakButton extends Button {
     public List<String> getDescription() {
         List<String> description = new ArrayList<>();
 
-        description.add(ColorUtil.translateColors("&f" + killStreak.getDescription()));
+        description.add(ColorUtil.translateColors("<white>" + killStreak.getDescription()));
         description.add("");
 
         if (profile.killstreak.get() >= killStreak.getKills()) {
-            description.add(ColorUtil.translateColors("&aYou've claimed this reward."));
+            description.add(ColorUtil.translateColors("<green>You've claimed this reward."));
         } else {
             int kills = killStreak.getKills();
             int progress = (kills == 0) ? 0 : (int) Math.round(((double) profile.killstreak.get() / (double) kills) * 100.0);
-            description.add(ColorUtil.translateColors("&6Your Progress: &f" + progress + "%"));
+            description.add(ColorUtil.translateColors("<gold>Your Progress: <white>" + progress + "%"));
         }
-        description.add(ColorUtil.translateColors("&6Kills: &f" + killStreak.getKills()));
+        description.add(ColorUtil.translateColors("<gold>Kills: <white>" + killStreak.getKills()));
 
         return description;
     }

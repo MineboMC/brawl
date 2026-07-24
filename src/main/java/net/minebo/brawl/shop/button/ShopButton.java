@@ -22,7 +22,7 @@ public class ShopButton extends Button {
         this.profile = profile;
         this.shopItem = shopItem;
 
-        setName(() -> shopItem.getColoredName());
+        setName(() -> shopItem.getName());
         setLines(() -> getDescription());
 
         // Left-click action
@@ -34,12 +34,12 @@ public class ShopButton extends Button {
     public List<String> getDescription() {
         List<String> description = new ArrayList<>();
 
-        description.add(ColorUtil.translateColors("&f" + shopItem.getDescription()));
+        description.add("<white>" + shopItem.getDescription());
         description.add("");
 
-        description.add("&fPrice: &2$&a" + shopItem.getPrice());
+        description.add("<white>Price: <dark_green>$<green>" + shopItem.getPrice());
         description.add("");
-        description.add("&7Left click to purchase!");
+        description.add("<gray>Left click to purchase!");
 
         return description;
     }

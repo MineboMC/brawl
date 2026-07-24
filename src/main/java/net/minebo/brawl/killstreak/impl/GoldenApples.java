@@ -13,12 +13,7 @@ public class GoldenApples extends KillStreak {
 
     @Override
     public String getName() {
-        return "Golden Apples";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.GOLD;
+        return "<gold>Golden Apples";
     }
 
     @Override

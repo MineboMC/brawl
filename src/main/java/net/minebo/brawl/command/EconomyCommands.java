@@ -28,7 +28,7 @@ public class EconomyCommands extends BaseCommand {
     public void checkBalanceCommand(Player player) {
         BrawlProfile profile = BrawlProfile.get(player);
 
-        player.sendMessage(ColorUtil.translateColors("&eYour balance: &2$&a" + profile.money));
+        player.sendMessage(ColorUtil.translateColors("<yellow>Your balance: <dark_green>$<green>" + profile.money));
     }
 
     @CommandAlias("balance|bal")
@@ -40,11 +40,11 @@ public class EconomyCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player.getUniqueId());
 
         if(profile == null) {
-            sender.sendMessage(ColorUtil.translateColors("&cThat player has not played this season."));
+            sender.sendMessage(ColorUtil.translateColors("<red>That player has not played this season."));
             return;
         }
 
-        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "&e's balance: &2$&a" + profile.money));
+        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "<yellow>'s balance: <dark_green>$<green>" + profile.money));
     }
 
     @CommandAlias("pay|p2p")
@@ -58,24 +58,24 @@ public class EconomyCommands extends BaseCommand {
         BrawlProfile recieverProfile = BrawlProfile.get(player.getUniqueId());
 
         if(recieverProfile == null) {
-            senderPlayer.sendMessage(ColorUtil.translateColors("&cThat player has not played this season."));
+            senderPlayer.sendMessage(ColorUtil.translateColors("<red>That player has not played this season."));
             return;
         }
 
         if(senderProfile.money.get() <= money) {
-            senderPlayer.sendMessage(ColorUtil.translateColors("&cYou don't have enough money."));
+            senderPlayer.sendMessage(ColorUtil.translateColors("<red>You don't have enough money."));
             return;
         }
 
         senderProfile.money.sub(money);
         recieverProfile.money.add(money);
 
-        senderPlayer.sendMessage(ColorUtil.translateColors("&eSent &2$&a" + money + "&e to " + player.getName()));
+        senderPlayer.sendMessage(ColorUtil.translateColors("<yellow>Sent <dark_green>$<green>" + money + "<yellow> to " + player.getName()));
 
         if(player.isOnline()) {
             Player recieverPlayer =  player.getPlayer();
 
-            recieverPlayer.sendMessage(ColorUtil.translateColors("&eYou've recieved &2$&a" + money + "&e from " + senderPlayer.getName()));
+            recieverPlayer.sendMessage(ColorUtil.translateColors("<yellow>You've recieved <dark_green>$<green>" + money + "<yellow> from " + senderPlayer.getName()));
         }
     }
 
@@ -88,12 +88,12 @@ public class EconomyCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player.getUniqueId());
 
         if(profile == null) {
-            sender.sendMessage(ColorUtil.translateColors("&cThat player has not played this season."));
+            sender.sendMessage(ColorUtil.translateColors("<red>That player has not played this season."));
             return;
         }
 
         profile.money.set(money);
-        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "&e's balance has been updated to &2$&a" + profile.money));
+        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "<yellow>'s balance has been updated to <dark_green>$<green>" + profile.money));
     }
 
     @Subcommand("add")
@@ -105,12 +105,12 @@ public class EconomyCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player.getUniqueId());
 
         if(profile == null) {
-            sender.sendMessage(ColorUtil.translateColors("&cThat player has not played this season."));
+            sender.sendMessage(ColorUtil.translateColors("<red>That player has not played this season."));
             return;
         }
 
         profile.money.add(money);
-        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "&e's balance has been updated to &2$&a" + profile.money));
+        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "<yellow>'s balance has been updated to <dark_green>$<green>" + profile.money));
     }
 
     @Subcommand("sub")
@@ -122,7 +122,7 @@ public class EconomyCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player.getUniqueId());
 
         if(profile == null) {
-            sender.sendMessage(ColorUtil.translateColors("&cThat player has not played this season."));
+            sender.sendMessage(ColorUtil.translateColors("<red>That player has not played this season."));
             return;
         }
 
@@ -133,7 +133,7 @@ public class EconomyCommands extends BaseCommand {
             profile.money.set(0);
         }
 
-        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "&e's balance has been updated to &2$&a" + profile.money));
+        sender.sendMessage(ColorUtil.translateColors(profile.lastUsername + "<yellow>'s balance has been updated to <dark_green>$<green>" + profile.money));
     }
 
 }

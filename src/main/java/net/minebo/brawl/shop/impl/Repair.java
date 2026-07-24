@@ -13,12 +13,7 @@ public class Repair extends ShopItem {
 
     @Override
     public String getName() {
-        return "Repair";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.AQUA;
+        return "<aqua>Repair";
     }
 
     @Override

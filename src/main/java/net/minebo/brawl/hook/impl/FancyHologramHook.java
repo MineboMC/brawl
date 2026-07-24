@@ -95,11 +95,11 @@ public class FancyHologramHook extends PluginHook {
         // Build the hologram text
         List<String> holoText = new ArrayList<>();
         holoText.add(currentCategory.getTitle());
-        holoText.add(""); // Empty line for spacing
+        holoText.add("<reset>"); // Empty line for spacing
 
         // Check if we have any data
         if (playerStats.isEmpty()) {
-            holoText.add("&7No data available yet!");
+            holoText.add("<gray>No data available yet!");
         } else {
             // Create PaginatedResult with comparator to sort by value (descending)
             PaginatedResult<Integer> paginatedResult = new PaginatedResult<>(
@@ -115,14 +115,14 @@ public class FancyHologramHook extends PluginHook {
             for (Map.Entry<String, Integer> entry : topPlayers.entrySet()) {
                 String color = getPositionColor(position);
                 GameProfile profile = BasaltAPI.INSTANCE.quickFindProfile(Bukkit.getOfflinePlayer(entry.getKey()).getUniqueId()).get();
-                holoText.add(color + "#" + position + " &f" + profile.getCurrentRank().getColor() + entry.getKey() + " &7- &e" + formatNumber(entry.getValue()));
+                holoText.add(color + "#" + position + " <white>" + profile.getCurrentRank().getColor() + entry.getKey() + " <gray>- <yellow>" + formatNumber(entry.getValue()));
                 position++;
             }
         }
 
         // Add countdown footer
         holoText.add("");
-        holoText.add("&7Switching in &e" + countdown + "&7...");
+        holoText.add("<gray>Switching in <yellow>" + countdown + "<gray>...");
 
         // Update the hologram
         data.setText(holoText);
@@ -130,16 +130,16 @@ public class FancyHologramHook extends PluginHook {
         hologram.queueUpdate();
     }
 
-    private String getPositionColor(int position) {
+    public static String getPositionColor(int position) {
         return switch (position) {
-            case 1 -> "&6"; // Gold
-            case 2 -> "&7"; // Gray (Silver)
-            case 3 -> "&c"; // Red (Bronze)
-            default -> "&f"; // White
+            case 1 -> "<#FFD700>"; // Gold
+            case 2 -> "<#C0C0C0>"; // Silver
+            case 3 -> "<#Cd7f32>"; // Bronze
+            default -> "<white>"; // White
         };
     }
 
-    private String formatNumber(int number) {
+    public static String formatNumber(int number) {
         if (number >= 1000000) {
             return String.format("%.1fM", number / 1000000.0);
         } else if (number >= 1000) {
@@ -149,11 +149,11 @@ public class FancyHologramHook extends PluginHook {
     }
 
     public enum StatCategory {
-        KILLS("&6&lTop Kills"),
-        DEATHS("&c&lTop Deaths"),
-        MONEY("&a&lTop Money"),
-        KILLSTREAK("&e&lCurrent Killstreak"),
-        HIGHEST_KILLSTREAK("&d&lHighest Killstreak");
+        KILLS("<gold><bold>Top Kills"),
+        DEATHS("<red><bold>Top Deaths"),
+        MONEY("<green><bold>Top Money"),
+        KILLSTREAK("<yellow><bold>Current Killstreak"),
+        HIGHEST_KILLSTREAK("<light_purple><bold>Highest Killstreak");
 
         private final String title;
 

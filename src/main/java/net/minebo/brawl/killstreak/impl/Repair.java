@@ -17,12 +17,7 @@ public class Repair extends KillStreak {
 
     @Override
     public String getName() {
-        return "Armor Repair";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.RED;
+        return "<red>Armor Repair";
     }
 
     @Override

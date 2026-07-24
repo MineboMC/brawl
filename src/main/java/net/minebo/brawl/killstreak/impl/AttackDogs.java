@@ -36,12 +36,7 @@ public class AttackDogs extends KillStreak {
 
     @Override
     public String getName() {
-        return "Attack Dogs";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.AQUA;
+        return "<aqua>Attack Dogs";
     }
 
     @Override

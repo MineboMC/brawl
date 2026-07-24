@@ -24,11 +24,11 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
     FileConfiguration cfg = Brawl.getInstance().getConfig();
 
-    TextAnimation animation = new TextAnimation(Brawl.getInstance(), cfg.getString("scoreboard.title"), ChatColor.GOLD, ChatColor.YELLOW, AnimationType.DEFAULT, true);
+    //TextAnimation animation = new TextAnimation(Brawl.getInstance(), cfg.getString("scoreboard.title"), "<gold>", "<yellow>", AnimationType.DEFAULT, true);
 
     @Override
     public String getModernTitle(Player player){
-        return animation.getCurrentFrame();
+        return "<gold><bold>BRAWL";
     }
 
     @Override
@@ -39,10 +39,6 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         lines.addAll(generateStatisticLines(player));
         lines.addAll(generateCooldownLines(player));
-
-        if(player.hasMetadata("modmode")){
-            lines.addAll(generateStaffLines(player));
-        }
 
         if(Bukkit.getPluginManager().isPluginEnabled("KoTH")) {
             if(Koth.currentKoth != null) lines.addAll(generateKothLines());
@@ -59,20 +55,20 @@ public class ScoreboardImpl extends ScoreboardProvider {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if(profile == null) {
-            return List.of("&cYour profile hasn't", "&cloaded properly.", "", "&cPlease relog.");
+            return List.of("<red>Your profile hasn't", "<red>loaded properly.", "", "<red>Please relog.");
         }
 
-        lines.add("&fKills: &e" + profile.kills);
-        lines.add("&fDeaths: &e" + profile.deaths);
+        lines.add("<white>Kills: <yellow>" + profile.kills);
+        lines.add("<white>Deaths: <yellow>" + profile.deaths);
 
         if(profile.killstreak.get() > 0) {
-            lines.add("&fStreak: &e" + profile.killstreak);
+            lines.add("<white>Streak: <yellow>" + profile.killstreak);
         }
 
-        lines.add("Money: &2$&a" + profile.money);
+        lines.add("Money: <dark_green>$<green>" + profile.money);
 
         if(profile.getSelectedKit() != null) {
-            lines.add("Kit: &e" + profile.getSelectedKit().getColoredName());
+            lines.add("Kit: <yellow>" + profile.getSelectedKit().getName());
         }
 
         return lines;
@@ -85,13 +81,13 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(pvpTag != null) {
             if (pvpTag.onCooldown(player)) {
-                lines.add(ColorUtil.translateHexColors("&cPvP Tag&c: &f" + pvpTag.getRemaining(player)));
+                lines.add(ColorUtil.translateColors("<red>PvP Tag<red>: <white>" + pvpTag.getRemaining(player)));
             }
         }
 
         if(Brawl.getInstance().getSpawnTimer().hasTimer(player.getUniqueId())) {
             if(Brawl.getInstance().getSpawnTimer().getRemaining(player) != "0") {
-                lines.add(ColorUtil.translateColors("&3Spawn: &f" + Brawl.getInstance().getSpawnTimer().getRemaining(player)));
+                lines.add(ColorUtil.translateColors("<dark_aqua>Spawn: <white>" + Brawl.getInstance().getSpawnTimer().getRemaining(player)));
             }
         }
 
@@ -101,7 +97,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(flight != null) {
             if(flight.onCooldown(player)) {
-                lines.add(ChatColor.of("#6E516B") + "Flight: &f" + flight.getRemaining(player));
+                lines.add(ChatColor.of("#6E516B") + "Flight: <white>" + flight.getRemaining(player));
             }
         }
 
@@ -109,7 +105,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(bolt != null) {
             if(bolt.onCooldown(player)) {
-                lines.add(ChatColor.of("#FFD700") + "Bolt: &f" + bolt.getRemaining(player));
+                lines.add(ChatColor.of("#FFD700") + "Bolt: <white>" + bolt.getRemaining(player));
             }
         }
 
@@ -117,7 +113,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(stomp != null) {
             if(stomp.onCooldown(player)) {
-                lines.add(ChatColor.of("#FF0000") + "Stomp: &f" + stomp.getRemaining(player));
+                lines.add(ChatColor.of("#FF0000") + "Stomp: <white>" + stomp.getRemaining(player));
             }
         }
 
@@ -125,7 +121,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(melon != null) {
             if(melon.onCooldown(player)) {
-                lines.add(ChatColor.of("#7FCC19") + "Melon Toss: &f" + melon.getRemaining(player));
+                lines.add(ChatColor.of("#7FCC19") + "Melon Toss: <white>" + melon.getRemaining(player));
             }
         }
 
@@ -133,7 +129,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(watergun != null) {
             if(watergun.onCooldown(player)) {
-                lines.add(ChatColor.AQUA + "Water Gun: &f" + watergun.getRemaining(player));
+                lines.add(ChatColor.AQUA + "Water Gun: <white>" + watergun.getRemaining(player));
             }
         }
 
@@ -141,7 +137,7 @@ public class ScoreboardImpl extends ScoreboardProvider {
 
         if(jump != null) {
             if(jump.onCooldown(player)) {
-                lines.add(ChatColor.YELLOW + "Jump: &f" + jump.getRemaining(player));
+                lines.add(ChatColor.YELLOW + "Jump: <white>" + jump.getRemaining(player));
             }
         }
 
@@ -154,22 +150,12 @@ public class ScoreboardImpl extends ScoreboardProvider {
         List<String> lines = new ArrayList<>();
         Koth koth = Koth.currentKoth;
 
-        lines.add("&9&l" + koth.getName() + " KoTH");
-        lines.add("&fTime: &e" + koth.getRemaining());
-        lines.add("&fCoords: &e/koth");
+        lines.add("<blue><bold>" + koth.getName() + " KoTH");
+        lines.add("<white>Time: <yellow>" + koth.getRemaining());
+        lines.add("<white>Coords: <yellow>/koth");
         lines.add("");
 
         return lines;
-    }
-
-    public List<String> generateStaffLines(Player player) {
-        return List.of("",
-            ChatColor.AQUA + "Staff Info:",
-            ChatColor.GRAY + " * " + ChatColor.RESET + "TPS: " + ServerUtil.getColoredTPS(),
-            ChatColor.GRAY + " * " + ChatColor.RESET + "Vanish: " + (player.hasMetadata("vanish") ? ChatColor.GREEN + "Yes" : ChatColor.RED + "No"),
-            ChatColor.GRAY + " * " + ChatColor.RESET + "Chat: " + (player.hasMetadata("toggleSC") ? ChatColor.GOLD + "Staff" : ChatColor.YELLOW + "Public"),
-                ""
-        );
     }
 
 }

@@ -13,12 +13,7 @@ public class Gopple extends KillStreak {
 
     @Override
     public String getName() {
-        return "God Apple";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.GOLD;
+        return "<light_purple>God Apple";
     }
 
     @Override

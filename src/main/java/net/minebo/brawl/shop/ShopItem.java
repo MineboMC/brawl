@@ -17,15 +17,10 @@ import java.util.List;
 public abstract class ShopItem implements Listener {
 
     abstract public String getName();
-    abstract public ChatColor getColor();
 
     abstract public String getDescription();
     abstract public ItemStack getIcon();
     abstract public Integer getPrice();
-
-    public String getColoredName() {
-        return getColor() + getName();
-    }
 
     public abstract void givePurchase(Player player);
 
@@ -52,19 +47,19 @@ public abstract class ShopItem implements Listener {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if(profile.getSelectedKit() == null) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can only buy items with a kit selected."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can only buy items with a kit selected."));
             return;
         }
 
         if(profile.money.get() < getPrice()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou don't have enough money to buy this."));
+            player.sendMessage(ColorUtil.translateColors("<red>You don't have enough money to buy this."));
             return;
         }
 
         profile.money.sub(getPrice());
         givePurchase(player);
 
-        player.sendMessage(ColorUtil.translateColors("&7You have bought " + getColoredName() + "&7."));
+        player.sendMessage(ColorUtil.translateColors("<gray>You have bought " + getName() + "<gray>."));
     }
 
     public static void openMenu(Player player) {

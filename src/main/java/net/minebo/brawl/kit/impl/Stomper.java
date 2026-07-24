@@ -38,10 +38,7 @@ public class Stomper extends Kit implements Listener {
     }
 
     @Override
-    public String getName() { return "Stomper"; }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.of("#FF0000"); }
+    public String getName() { return "<#FF0000>Stomper"; }
 
     @Override
     public String getDescription() { return "Stomp on your enemies to kill them!"; }
@@ -52,7 +49,7 @@ public class Stomper extends Kit implements Listener {
     @Override
     public ItemStack getAbilityItem() {
         return new ItemBuilder(Material.ANVIL)
-                .setName(getColor() + "Stomp")
+                .setName("<#FF0000>Stomp")
                 .build();
     }
     @Override
@@ -102,13 +99,13 @@ public class Stomper extends Kit implements Listener {
 
         BrawlProfile profile = BrawlProfile.get(player);
         if(profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
             return;
         }
 
         Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Stomp");
         if(cd.onCooldown(player)) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+            player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
             return;
         }
 
@@ -150,7 +147,7 @@ public class Stomper extends Kit implements Listener {
                 if (target.equals(player)) continue; // <-- SKIP the stomper!
                 double damage = Math.min(32.0, player.getFallDistance() / 2.0);
                 target.damage(damage, player);
-                target.sendMessage(ColorUtil.translateColors("&eYou were stomped by " + player.getDisplayName() + "&e!"));
+                target.sendMessage(ColorUtil.translateColors("<yellow>You were stomped by " + player.getDisplayName() + "<yellow>!"));
             }
 
             // Show effect to all nearby/online players

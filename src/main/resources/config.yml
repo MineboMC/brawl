@@ -1,6 +1,6 @@
 scoreboard:
-  title: "&6&lBRAWL &c[Beta]"
-  url: "&eminebo.net"
+  title: "<gold><bold>BRAWL <red>[Beta]"
+  url: "<yellow>minebo.net"
 
 mongo:
   uri: "mongodb://localhost:27017"

@@ -21,13 +21,13 @@ public class SpawnTimer extends Timer {
 
     @Override
     protected void onStart(Player player) {
-        player.sendMessage(ColorUtil.translateColors("&eTeleporting you to spawn in 10 seconds."));
+        player.sendMessage(ColorUtil.translateColors("<yellow>Teleporting you to spawn in 10 seconds."));
     }
 
     @Override
     protected boolean onTick(Player player, int secondsLeft) {
         if (player.hasMetadata("frozen")) {
-            player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you are frozen."));
+            player.sendMessage(ColorUtil.translateColors("<red>Your teleport to spawn has cancelled since you are frozen."));
             return false;
         }
         return true;
@@ -42,11 +42,11 @@ public class SpawnTimer extends Timer {
         }
 
         player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-        player.sendMessage(ColorUtil.translateColors("&eYou have been teleported to spawn!"));
+        player.sendMessage(ColorUtil.translateColors("<yellow>You have been teleported to spawn!"));
 
         if (!profile.isSpawnProtected()) {
             profile.spawnProtected = true;
-            player.sendMessage(ColorUtil.translateColors("&aYour spawn protection has been enabled."));
+            player.sendMessage(ColorUtil.translateColors("<green>Your spawn protection has been enabled."));
         }
 
         Kit.clear(player);
@@ -62,7 +62,7 @@ public class SpawnTimer extends Timer {
         }
 
         if(hasTimer(player.getUniqueId())) {
-            player.sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you moved."));
+            player.sendMessage(ColorUtil.translateColors("<red>Your teleport to spawn has cancelled since you moved."));
             taskMap.remove(player.getUniqueId());
         }
     }
@@ -70,7 +70,7 @@ public class SpawnTimer extends Timer {
     @EventHandler
     public void onTakeDamage(EntityDamageByEntityEvent event) {
         if(hasTimer(event.getEntity().getUniqueId())) {
-            event.getEntity().sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you were hit."));
+            event.getEntity().sendMessage(ColorUtil.translateColors("<red>Your teleport to spawn has cancelled since you were hit."));
             taskMap.remove(event.getEntity().getUniqueId());
         }
     }
@@ -78,7 +78,7 @@ public class SpawnTimer extends Timer {
     @EventHandler
     public void onDoDamage(EntityDamageByEntityEvent event) {
         if(hasTimer(event.getDamager().getUniqueId())) {
-            event.getDamager().sendMessage(ColorUtil.translateColors("&cYour teleport to spawn has cancelled since you hit a player."));
+            event.getDamager().sendMessage(ColorUtil.translateColors("<red>Your teleport to spawn has cancelled since you hit a player."));
             taskMap.remove(event.getDamager().getUniqueId());
         }
     }

@@ -3,6 +3,7 @@ package net.minebo.brawl.shop.impl;
 import net.md_5.bungee.api.ChatColor;
 import net.minebo.brawl.Brawl;
 import net.minebo.brawl.shop.ShopItem;
+import net.minebo.cobalt.util.BottleType;
 import net.minebo.cobalt.util.InventoryUtil;
 import net.minebo.cobalt.util.ItemBuilder;
 import net.minebo.cobalt.util.PotionBuilder;
@@ -19,16 +20,11 @@ import org.bukkit.potion.PotionType;
 
 public class Adrenaline extends ShopItem {
 
-    ItemStack potion = new PotionBuilder(Material.POTION).setName("&cAdrenaline").setColor(Color.RED).addEffect(PotionEffectType.SPEED, 3, 5).addEffect(PotionEffectType.STRENGTH, 2, 5).build();
+    ItemStack potion = new PotionBuilder(BottleType.DRINK).setName("<red>Adrenaline").setColor(Color.RED).addEffect(PotionEffectType.SPEED, 3, 5).addEffect(PotionEffectType.STRENGTH, 2, 5).build();
 
     @Override
     public String getName() {
-        return "Adrenaline";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.RED;
+        return "<red>Adrenaline";
     }
 
     @Override

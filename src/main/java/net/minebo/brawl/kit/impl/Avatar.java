@@ -44,10 +44,7 @@ public class Avatar extends Kit {
     public ItemStack getIcon() { return new ItemStack(Material.BEACON); }
 
     @Override
-    public String getName() { return "Avatar"; }
-
-    @Override
-    public ChatColor getColor() { return ChatColor.AQUA; }
+    public String getName() { return "<aqua>Avatar"; }
 
     @Override
     public String getDescription() { return "Bend the elements!"; }
@@ -58,7 +55,7 @@ public class Avatar extends Kit {
     @Override
     public ItemStack getAbilityItem() {
         return new ItemBuilder(Material.LIGHT_BLUE_DYE)
-                .setName(getColor() + "Water Gun")
+                .setName("<aqua>Water Gun")
                 .build();
     }
 
@@ -108,13 +105,13 @@ public class Avatar extends Kit {
             BrawlProfile profile = BrawlProfile.get(player);
 
             if (profile.isSpawnProtected()) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
                 return;
             }
 
             Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Water Gun");
             if (cd.onCooldown(player)) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
                 return;
             }
             cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());
@@ -252,13 +249,13 @@ public class Avatar extends Kit {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if (profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can't use this ability while protected by spawn."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can't use this ability while protected by spawn."));
             return;
         }
 
         Cooldown cd = Brawl.getInstance().getCooldownHandler().getCooldown("Avatar Jump");
         if (cd.onCooldown(player)) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + cd.getRemaining(player)));
+            player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + cd.getRemaining(player)));
             return;
         }
         cd.applyCooldown(player, 15, TimeUnit.SECONDS, Brawl.getInstance());

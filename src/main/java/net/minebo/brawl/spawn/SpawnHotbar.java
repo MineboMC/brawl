@@ -12,13 +12,13 @@ import org.bukkit.inventory.PlayerInventory;
 public class SpawnHotbar {
 
     public static ItemStack KIT_SELECTOR = new ItemBuilder(Material.ENCHANTED_BOOK)
-            .setName(ColorUtil.translateColors("&6Kit Selector"))
-            .setLore(ColorUtil.translateColors("&8Right click to select a kit."))
+            .setName("<gold>Kit Selector")
+            .setLore(ColorUtil.translateColors("<dark_gray>Right click to select a kit."))
             .build();
 
     public static ItemStack LAST_KIT = new ItemBuilder(Material.CLOCK)
-            .setName(ColorUtil.translateColors("&9Last Kit"))
-            .setLore(ColorUtil.translateColors("&8Right click to use the last used kit."))
+            .setName("<blue>Last Kit")
+            .setLore(ColorUtil.translateColors("<dark_gray>Right click to use the last used kit."))
             .build();
 
     public static void giveItems(Player player) {

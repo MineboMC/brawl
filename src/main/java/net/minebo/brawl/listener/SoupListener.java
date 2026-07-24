@@ -72,7 +72,7 @@ public class SoupListener implements Listener {
 
         if(event.getItemDrop().getItemStack().getType() != Material.BOWL && event.getItemDrop().getItemStack().getType() != Material.MUSHROOM_STEW) {
             event.setCancelled(true);
-            player.sendMessage(ColorUtil.translateColors("&cYou can't drop that."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can't drop that."));
             return;
         }
 
@@ -108,7 +108,7 @@ public class SoupListener implements Listener {
             Cooldown soupCooldown = Brawl.getInstance().getCooldownHandler().getCooldown("Free Soup");
 
             if (soupCooldown.onCooldown(player)) {
-                player.sendMessage(ColorUtil.translateColors("&cYou can't use this for &l" + soupCooldown.getRemaining(player)));
+                player.sendMessage(ColorUtil.translateColors("<red>You can't use this for <bold>" + soupCooldown.getRemaining(player)));
                 return;
             }
 

@@ -27,7 +27,6 @@ public abstract class Kit implements Listener {
 
     public abstract ItemStack getIcon();
     public abstract String getName();
-    public abstract ChatColor getColor();
     public abstract String getDescription();
     public abstract Integer getPrice();
 
@@ -35,10 +34,6 @@ public abstract class Kit implements Listener {
     public abstract List<ItemStack> getArmor();
 
     public abstract List<PotionEffect> getEffects();
-
-    public String getColoredName() {
-        return getColor() + getName();
-    }
 
     public ItemStack getAbilityItem() {
         return null;
@@ -81,7 +76,7 @@ public abstract class Kit implements Listener {
 
         getEffects().forEach(player::addPotionEffect);
 
-        player.sendMessage(ColorUtil.translateColors("&7You have chosen the &a" + getColoredName() + "&7 kit."));
+        player.sendMessage(ColorUtil.translateColors("<gray>You have chosen the <green>" + getName() + "<gray> kit."));
     }
 
     public static void clear(Player player) {
@@ -140,13 +135,13 @@ public abstract class Kit implements Listener {
                     .setBasePotionType(PotionType.STRONG_POISON)
                     .build());
 
-            player.sendMessage(ColorUtil.translateColors("&7Your potions have been replenished."));
+            player.sendMessage(ColorUtil.translateColors("<gray>Your potions have been replenished."));
         }
 
         if(profile.getSelectedKit() instanceof Palioxis) {
             inv.setItem(1, new ItemStack(Material.ENDER_PEARL));
 
-            player.sendMessage(ColorUtil.translateColors("&7Your pearl has been replenished."));
+            player.sendMessage(ColorUtil.translateColors("<gray>Your pearl has been replenished."));
         }
     }
 

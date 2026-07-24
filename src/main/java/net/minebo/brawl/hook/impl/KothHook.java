@@ -26,7 +26,7 @@ public class KothHook extends PluginHook {
         Player player = event.getWinner();
         BrawlProfile profile = BrawlProfile.get(player);
 
-        player.sendActionBar(ColorUtil.translateColors("&a+ &2$&a50 (capped koth)"));
+        player.sendActionBar(ColorUtil.translateColors("<green>+ <dark_green>$<green>50 (capped koth)"));
         profile.money.add(50);
     }
 

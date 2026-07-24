@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TipTask extends BukkitRunnable {
 
-    String TIP_PREFIX = "&8[&6TIP&8] ";
+    String TIP_PREFIX = "<dark_gray>[<gold>TIP<dark_gray>] ";
 
     List<String> tips = new ArrayList<>();
 
@@ -22,11 +22,11 @@ public class TipTask extends BukkitRunnable {
     }
 
     public void generateTips() {
-        tips.add("&eSoup heals 3.5 hearts!");
-        tips.add("&eThere are free soup signs around the map!");
-        tips.add("&eWalking on &bSponge &ewill shoot you upwards!");
-        tips.add("&eKillstreaks will get you rewards, check out &d/ks&e!");
-        if(Kit.freeKitMode) tips.add("&eAll kits are free to use!");
+        tips.add("<yellow>Soup heals 3.5 hearts!");
+        tips.add("<yellow>There are free soup signs around the map!");
+        tips.add("<yellow>Walking on <aqua>Sponge <yellow>will shoot you upwards!");
+        tips.add("<yellow>Killstreaks will get you rewards, check out <light_purple>/ks<yellow>!");
+        if(Kit.freeKitMode) tips.add("<yellow>All kits are free to use!");
     }
 
     @Override

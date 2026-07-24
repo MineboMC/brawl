@@ -5,12 +5,15 @@ import lombok.Setter;
 import net.minebo.brawl.cobalt.ScoreboardImpl;
 import net.minebo.brawl.cobalt.completion.KitCompletionHandler;
 import net.minebo.brawl.cobalt.completion.ShopItemCompletionHandler;
+import net.minebo.brawl.cobalt.completion.StatCategoryCompletionHandler;
 import net.minebo.brawl.cobalt.context.KitContextResolver;
 import net.minebo.brawl.cobalt.context.ShopItemContextResolver;
+import net.minebo.brawl.cobalt.context.StatCategoryContextResolver;
 import net.minebo.brawl.cobalt.cooldown.CombatTagCooldown;
 import net.minebo.brawl.cobalt.timer.NukeTimer;
 import net.minebo.brawl.cobalt.timer.SpawnTimer;
 import net.minebo.brawl.hook.PluginHook;
+import net.minebo.brawl.hook.impl.FancyHologramHook;
 import net.minebo.brawl.killstreak.KillStreak;
 import net.minebo.brawl.kit.Kit;
 import net.minebo.brawl.listener.*;
@@ -60,8 +63,10 @@ public class Brawl extends JavaPlugin {
 
         ACFCommandController.registerCompletion("kits", new KitCompletionHandler());
         ACFCommandController.registerCompletion("shopitems", new ShopItemCompletionHandler());
+        ACFCommandController.registerCompletion("statcategories", new StatCategoryCompletionHandler());
         ACFCommandController.registerContext(Kit.class, new KitContextResolver());
         ACFCommandController.registerContext(ShopItem.class, new ShopItemContextResolver());
+        ACFCommandController.registerContext(FancyHologramHook.StatCategory.class, new StatCategoryContextResolver());
 
         ACFCommandController.registerAll(this);
 

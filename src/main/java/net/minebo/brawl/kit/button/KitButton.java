@@ -21,7 +21,7 @@ public class KitButton extends Button {
         this.profile = profile;
         this.kit = kit;
 
-        setName(() -> kit.getColoredName());
+        setName(() -> kit.getName());
         setLines(() -> getDescription());
 
         // Left-click action
@@ -33,10 +33,10 @@ public class KitButton extends Button {
                 if (profile.money.get() >= kit.getPrice()) {
                     profile.money.sub(kit.getPrice());
                     profile.ownedKits.add(kit.getName());
-                    player.sendMessage(ColorUtil.translateColors("&7You have purchased &a" + kit.getColoredName() + "&7."));
+                    player.sendMessage(ColorUtil.translateColors("<gray>You have purchased <green>" + kit.getName() + "<gray>."));
                     profile.save();
                 } else {
-                    player.sendMessage(ColorUtil.translateColors("&cYou do not have enough money for this kit."));
+                    player.sendMessage(ColorUtil.translateColors("<red>You do not have enough money for this kit."));
                 }
             }
         });
@@ -45,18 +45,18 @@ public class KitButton extends Button {
     public List<String> getDescription() {
         List<String> description = new ArrayList<>();
 
-        description.add(ColorUtil.translateColors("&f" + kit.getDescription()));
+        description.add("<white>" + kit.getDescription());
         description.add("");
 
         if (profile.ownsKit(kit)) {
-            description.add("&aYou own this kit!");
+            description.add("<green>You own this kit!");
             description.add("");
-            description.add("&7Left click to equip!");
+            description.add("<gray>Left click to equip!");
         } else {
-            description.add("&cYou don't own this kit.");
-            description.add("&fPrice: &2$&a" + kit.getPrice());
+            description.add("<red>You don't own this kit.");
+            description.add("<white>Price: <dark_green>$<green>" + kit.getPrice());
             description.add("");
-            description.add("&7Left click to purchase!");
+            description.add("<gray>Left click to purchase!");
         }
 
         return description;

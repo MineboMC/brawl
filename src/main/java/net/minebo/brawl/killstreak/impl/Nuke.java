@@ -15,12 +15,7 @@ public class Nuke extends KillStreak {
 
     @Override
     public String getName() {
-        return "Nuke";
-    }
-
-    @Override
-    public ChatColor getColor() {
-        return ChatColor.DARK_RED;
+        return "<dark_red>Nuke";
     }
 
     @Override

@@ -23,7 +23,7 @@ public class KitCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if(!profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can only use this command in Spawn."));
             return;
         }
 
@@ -36,7 +36,7 @@ public class KitCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if(!profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can only use this command in Spawn."));
             return;
         }
 
@@ -49,7 +49,7 @@ public class KitCommands extends BaseCommand {
         BrawlProfile profile = BrawlProfile.get(player);
 
         if(!profile.isSpawnProtected()) {
-            player.sendMessage(ColorUtil.translateColors("&cYou can only use this command in Spawn."));
+            player.sendMessage(ColorUtil.translateColors("<red>You can only use this command in Spawn."));
             return;
         }
 

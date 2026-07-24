@@ -15,7 +15,6 @@ import java.util.List;
 public abstract class KillStreak {
 
     abstract public String getName();
-    abstract public ChatColor getColor();
 
     abstract public String getDescription();
     abstract public ItemStack getIcon();
@@ -62,7 +61,7 @@ public abstract class KillStreak {
 
         if(killStreak == null) return;
 
-        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " &ehas gotten their " + killStreak.getColor() + killStreak.getName() + " &ekillstreak!")));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(player.getDisplayName() + " <yellow>has gotten their " + killStreak.getName() + " <yellow>killstreak!")));
 
         killStreak.doReward(player);
     }

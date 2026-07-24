@@ -27,7 +27,7 @@ public class ProtectionListener implements Listener {
             BrawlProfile profile = BrawlProfile.get(player);
             if (profile != null) {
                 profile.spawnProtected = true;
-                player.sendMessage(ColorUtil.translateColors("&aYou are protected by spawn!"));
+                player.sendMessage(ColorUtil.translateColors("<green>You are protected by spawn!"));
             }
         }
     }
@@ -53,7 +53,7 @@ public class ProtectionListener implements Listener {
         // Leaving SafeZone: break spawn protection
         if (profile.isSpawnProtected() && !toSafe && fromSafe) {
             profile.spawnProtected = false;
-            player.sendMessage(ColorUtil.translateColors("&cYour spawn protection has been broken!"));
+            player.sendMessage(ColorUtil.translateColors("<red>Your spawn protection has been broken!"));
 
             if(profile.getSelectedKit() == null) {
                 if(Kit.get(profile.lastKit) == null) {
@@ -67,7 +67,7 @@ public class ProtectionListener implements Listener {
         // Entering SafeZone by walking: bounce back unless already inside
         if (!fromSafe && toSafe) {
             event.setTo(fromLoc); // Teleport back to previous position
-            player.sendMessage(ColorUtil.translateColors("&cYou cannot enter the spawn region!"));
+            player.sendMessage(ColorUtil.translateColors("<red>You cannot enter the spawn region!"));
         }
     }
 
@@ -96,7 +96,7 @@ public class ProtectionListener implements Listener {
         // If target is protected, cancel damage and send message
         if (targetProfile.isSpawnProtected()) {
             event.setCancelled(true);
-            attacker.sendMessage(ColorUtil.translateColors("&cThis player currently has spawn protection!"));
+            attacker.sendMessage(ColorUtil.translateColors("<red>This player currently has spawn protection!"));
             return;
         }
     }

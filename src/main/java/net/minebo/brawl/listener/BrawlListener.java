@@ -28,19 +28,19 @@ public class BrawlListener implements Listener {
         event.setJoinMessage(null);
 
         if(!event.getPlayer().hasPlayedBefore()) {
-            Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &ehas joined for the first time! &7(&f#" + BrawlProfile.profiles.size() + 1 + "&7)")));
+            Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " <yellow>has joined for the first time! <gray>(<white>#" + BrawlProfile.profiles.size() + 1 + "<gray>)")));
         } else if(Bukkit.getOnlinePlayers().size() <= 20) {
             try {
                 GameProfile basaltProfile = BasaltAPI.INSTANCE.quickFindProfile(event.getPlayer().getUniqueId()).get();
 
-                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(basaltProfile.getCurrentRank().getColor() + event.getPlayer().getName() + " &6joined.")));
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(basaltProfile.getCurrentRank().getColor() + event.getPlayer().getName() + " <gold>joined.")));
             } catch (Exception e) {
-                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &6joined.")));
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " <gold>joined.")));
             }
         }
 
         if(Kit.freeKitMode) {
-            event.getPlayer().sendMessage(ColorUtil.translateColors("&eAll kits are currently free, try them out!"));
+            event.getPlayer().sendMessage(ColorUtil.translateColors("<yellow>All kits are currently free, try them out!"));
         }
 
         // If not already in memory, attempt DB lookup (should rarely happen if pre-load works)
@@ -82,7 +82,7 @@ public class BrawlListener implements Listener {
         event.setQuitMessage(null);
 
         if(Bukkit.getOnlinePlayers().size() <= 20) {
-            Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " &6left.")));
+            Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage(ColorUtil.translateColors(event.getPlayer().getDisplayName() + " <gold>left.")));
         }
 
         profile.save();

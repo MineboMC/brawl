@@ -111,25 +111,25 @@ public class DeathListener implements Listener {
         killerProfile.killstreak.add(1);
 
         if(killerProfile.killstreak.get() > killerProfile.highestkillstreak.get()) {
-            killer.sendMessage(ColorUtil.translateColors("&aNew Record! &fYou've gotten a streak of " + killerProfile.killstreak.get() + "!"));
+            killer.sendMessage(ColorUtil.translateColors("<green>New Record! <white>You've gotten a streak of " + killerProfile.killstreak.get() + "!"));
             killerProfile.highestkillstreak.set(killerProfile.killstreak.get());
         }
 
         victimProfile.deaths.add(1);
         victimProfile.killstreak.set(0);
 
-        victim.sendMessage(ColorUtil.translateColors("&cYou died to " + killer.getDisplayName() + ((killerProfile.getSelectedKit() != null ) ? " &cusing " + killerProfile.getSelectedKit().getColoredName() + "&c!" : "&c!")));
-        killer.sendMessage(ColorUtil.translateColors("&7You got &2$&a10 &7for killing " + victim.getDisplayName() + "&7!"));
+        victim.sendMessage(ColorUtil.translateColors("<red>You died to " + killer.getDisplayName() + ((killerProfile.getSelectedKit() != null ) ? " <red>using " + killerProfile.getSelectedKit().getName() + "<red>!" : "<red>!")));
+        killer.sendMessage(ColorUtil.translateColors("<gray>You got <dark_green>$<green>10 <gray>for killing " + victim.getDisplayName() + "<gray>!"));
 
         GameProfile profile = BasaltAPI.INSTANCE.quickFindProfile(killer.getUniqueId()).get();
         Integer extraMoney = getExtraMoney(profile);
 
         if(extraMoney > 0) {
             killerProfile.money.add(extraMoney);
-            killer.sendMessage(ColorUtil.translateColors("&7And another &2$&a" + extraMoney + " &7for being a " + profile.getCurrentRank().getColor() + profile.getCurrentRank().getDisplayName() + "&7!"));
+            killer.sendMessage(ColorUtil.translateColors("<gray>And another <dark_green>$<green>" + extraMoney + " <gray>for being a " + profile.getCurrentRank().getColor() + profile.getCurrentRank().getDisplayName() + "<gray>!"));
         }
 
-        killer.sendActionBar(ColorUtil.translateColors("&a+ &2$&a" + (10+extraMoney) + " (killed " + victim.getName()) + ")");
+        killer.sendActionBar(ColorUtil.translateColors("<green>+ <dark_green>$<green>" + (10+extraMoney) + " (killed " + victim.getName()) + ")");
 
         killerProfile.money.add(10);
 
@@ -156,7 +156,7 @@ public class DeathListener implements Listener {
 
         profile.save();
 
-        victim.sendMessage(ColorUtil.translateColors("&cYou died."));
+        victim.sendMessage(ColorUtil.translateColors("<red>You died."));
     }
 
     public Integer getExtraMoney(GameProfile profile) {
